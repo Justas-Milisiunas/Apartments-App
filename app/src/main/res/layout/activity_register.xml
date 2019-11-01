@@ -87,6 +87,7 @@
         android:layout_width="@dimen/edit_text"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_small"
+        android:onClick="register"
         android:text="@string/register_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
