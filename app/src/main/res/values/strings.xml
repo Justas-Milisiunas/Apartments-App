@@ -3,4 +3,8 @@
     <string name="email_hint">Email</string>
     <string name="login_title">Login</string>
     <string name="password_hint">Password</string>
+    <string name="registration_title">Registration</string>
+    <string name="first_name_hint">First name</string>
+    <string name="last_name_hint">Last name</string>
+    <string name="register_button">Register</string>
 </resources>
