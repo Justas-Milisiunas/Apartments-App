@@ -2,6 +2,7 @@ package com.apartmentslt.apartments;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -43,14 +44,18 @@ public class RegisterActivity extends AppCompatActivity {
             case 0:
                 // Owner
 
+                finish();
                 break;
             case 1:
                 // Tenant
-
+                Intent intent = new Intent(this, ApartmentsListActivity.class);
+                startActivity(intent);
+                finish();
                 break;
             case 2:
                 // Worker
 
+                finish();
                 break;
         }
     }
