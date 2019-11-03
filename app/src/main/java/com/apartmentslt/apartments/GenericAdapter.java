@@ -13,10 +13,12 @@ import java.util.LinkedList;
 public abstract class GenericAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private LinkedList<T> dataList;
     private LayoutInflater mInflater;
+    protected Context mContext;
 
     GenericAdapter(Context context) {
         this.dataList = new LinkedList<>();
         this.mInflater = LayoutInflater.from(context);
+        this.mContext = context;
     }
 
     /**
