@@ -9,7 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ApartmentsListActivity"></activity>
+        <activity
+            android:name=".ApartmentDetailsActivity"
+            android:label="Apartment"
+            android:parentActivityName=".ApartmentsListActivity">
+
+        </activity>
+        <activity android:name=".ApartmentsListActivity" />
         <activity
             android:name=".RegisterActivity"
             android:label="Registration"

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,7 +46,11 @@ public class ApartmentsListActivity extends AppCompatActivity {
 
             @Override
             public void onClick(Apartment item, int position) {
-                Toast.makeText(getApplicationContext(), item.getAddress(), Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getApplicationContext(), ApartmentDetailsActivity.class);
+                intent.putExtra(ApartmentDetailsActivity.APARTMENT_DATA_KEY, item);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                getBaseContext().startActivity(intent);
             }
         };
 
@@ -56,7 +61,7 @@ public class ApartmentsListActivity extends AppCompatActivity {
     }
 
     private void loadData() {
-        Apartment demo = new Apartment(50, 3, 15, "Studentu g 60, Kaunas", ApartmentStatus.EMPTY);
+        Apartment demo = new Apartment(50, 3, 15, "Studentu g 60, Kaunas", ApartmentStatus.EMPTY, "Good apartment");
         this.mAdapter.addItem(demo);
         this.mAdapter.addItem(demo);
         this.mAdapter.addItem(demo);
