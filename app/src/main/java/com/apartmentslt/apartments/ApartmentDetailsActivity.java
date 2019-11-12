@@ -2,15 +2,23 @@ package com.apartmentslt.apartments;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.apartmentslt.apartments.models.Apartment;
 
-public class ApartmentDetailsActivity extends AppCompatActivity {
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.Calendar;
+import java.util.Locale;
+
+public class ApartmentDetailsActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     private static final String TAG = ApartmentDetailsActivity.class.getName();
     public final static String APARTMENT_DATA_KEY = "com.apartmentslt.apartments.APARTMENT_DATA";
 
@@ -31,7 +39,17 @@ public class ApartmentDetailsActivity extends AppCompatActivity {
         toolbar.show();
     }
 
+    /**
+     * Opens calendar to select booking dates after book button click
+     * https://stackoverflow.com/questions/39916178/how-to-show-datepickerdialog-on-button-click DatePickerDialog
+     *
+     * @param view View
+     */
     public void bookApartment(View view) {
+        // TODO: Change DatePickerDialog to other for selecting date ranges https://github.com/heysupratim/MaterialDateRangePicker
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, this, Calendar.YEAR, Calendar.MONTH, Calendar.DAY_OF_MONTH);
+        datePickerDialog.show();
     }
 
     /**
@@ -62,5 +80,19 @@ public class ApartmentDetailsActivity extends AppCompatActivity {
         ((TextView) findViewById(R.id.address)).setText(apartment.getAddress());
         // TODO: Finish binding
 //        ((TextView) findViewById(R.id.price)).setText();
+    }
+
+    /**
+     * After date select
+     *
+     * @param view       View
+     * @param year       Selected year
+     * @param month      Selected month
+     * @param dayOfMonth Selected day
+     */
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        Toast.makeText(this, String.format(Locale.getDefault(), "Year: %d Month: %d Day: %d",
+                year, month, dayOfMonth), Toast.LENGTH_LONG).show();
     }
 }

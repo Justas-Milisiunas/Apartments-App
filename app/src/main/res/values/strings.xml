@@ -8,4 +8,6 @@
     <string name="last_name_hint">Last name</string>
     <string name="register_button">Register</string>
     <string name="apartment_image_description">Apartment image</string>
+    <string name="book_button">Book</string>
+    <string name="booking_cancel_button">Booking cancel</string>
 </resources>

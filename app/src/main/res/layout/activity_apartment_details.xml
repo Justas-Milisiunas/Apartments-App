@@ -20,12 +20,12 @@
             android:id="@+id/apartment_image"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/apartment_image_description"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/include2"
-            app:srcCompat="@drawable/images"
-            android:contentDescription="@string/apartment_image_description" />
+            app:srcCompat="@drawable/images" />
 
         <Button
             android:id="@+id/apartment_book"
@@ -33,8 +33,20 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_super_small"
             android:onClick="bookApartment"
-            android:text="Book"
+            android:text="@string/book_button"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/apartment_image" />
+
+        <Button
+            android:id="@+id/booking_cancel"
+            style="@style/Button.Cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin"
+            android:layout_marginLeft="@dimen/margin_super_small"
+            android:layout_marginTop="@dimen/margin_super_small"
+            android:text="@string/booking_cancel_button"
+            app:layout_constraintStart_toEndOf="@+id/apartment_book"
             app:layout_constraintTop_toBottomOf="@+id/apartment_image" />
 
         <View
@@ -102,12 +114,11 @@
             android:id="@+id/description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Temp"
             android:padding="@dimen/padding"
+            android:text="Temp"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/divider4" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
