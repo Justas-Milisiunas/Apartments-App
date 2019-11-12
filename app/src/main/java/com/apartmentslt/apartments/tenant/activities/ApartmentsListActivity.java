@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.apartmentslt.apartments.Appbar;
 import com.apartmentslt.apartments.GenericAdapter;
@@ -34,7 +35,11 @@ public class ApartmentsListActivity extends AppCompatActivity implements BottomN
 
         // Add bottom navigation bar
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_toolbar);
-        bottomNavigationView.setOnNavigationItemSelectedListener(this);
+        if (bottomNavigationView != null) {
+            bottomNavigationView.setOnNavigationItemSelectedListener(this);
+        } else  {
+            Toast.makeText(this, "Bottom navigation bar could not be loaded", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private GenericAdapter<Apartment> initializeRecyclerView() {
@@ -93,7 +98,8 @@ public class ApartmentsListActivity extends AppCompatActivity implements BottomN
             case R.id.navigation_apartments_list:
                 break;
             case R.id.navigation_write_complaint:
-
+                Intent complaintIntent = new Intent(this, WriteComplaintActivity.class);
+                startActivity(complaintIntent);
                 break;
         }
         return false;
