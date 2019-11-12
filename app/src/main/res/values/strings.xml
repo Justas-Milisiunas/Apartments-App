@@ -10,4 +10,6 @@
     <string name="apartment_image_description">Apartment image</string>
     <string name="book_button">Book</string>
     <string name="booking_cancel_button">Booking cancel</string>
+    <string name="apartments_menu_item">Apartments</string>
+    <string name="write_complaint_menu_item">Write Complaint</string>
 </resources>

@@ -7,15 +7,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.apartmentslt.apartments.models.Apartment;
 import com.apartmentslt.apartments.models.ApartmentStatus;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.LinkedList;
 
-public class ApartmentsListActivity extends AppCompatActivity {
+public class ApartmentsListActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     GenericAdapter<Apartment> mAdapter;
 
     @Override
@@ -26,8 +28,13 @@ public class ApartmentsListActivity extends AppCompatActivity {
         mAdapter = initializeRecyclerView();
         loadData();
 
+        // Add top toolbar
         Appbar toolbar = new Appbar(this, R.id.toolbar, getTitle().toString());
         toolbar.show();
+
+        // Add bottom navigation bar
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_toolbar);
+        bottomNavigationView.setOnNavigationItemSelectedListener(this);
     }
 
     private GenericAdapter<Apartment> initializeRecyclerView() {
@@ -68,5 +75,17 @@ public class ApartmentsListActivity extends AppCompatActivity {
         this.mAdapter.addItem(demo);
         this.mAdapter.addItem(demo);
         this.mAdapter.addItem(demo);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            // TODO: Add bottom navigation bar functionality
+            case R.id.navigation_apartments_list:
+                break;
+            case R.id.navigation_write_complaint:
+                break;
+        }
+        return false;
     }
 }

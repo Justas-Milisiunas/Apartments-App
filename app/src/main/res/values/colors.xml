@@ -6,4 +6,5 @@
     <color name="buttonColor">#fbc02d</color>
     <color name="cancelButtonColor">#FF0000</color>
     <color name="textBackground">#80000000</color>
+    <color name="white">#FFF</color>
 </resources>
