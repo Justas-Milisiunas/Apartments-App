@@ -1,10 +1,13 @@
 package com.apartmentslt.apartments.tenant.activities;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -40,6 +43,14 @@ public class ApartmentsListActivity extends AppCompatActivity implements BottomN
         } else  {
             Toast.makeText(this, "Bottom navigation bar could not be loaded", Toast.LENGTH_SHORT).show();
         }
+
+        // Load filtering dialog
+        createFilteringDialog();
+    }
+
+    private void createFilteringDialog() {
+        FilterDialog filterDialog = new FilterDialog();
+        filterDialog.show(getSupportFragmentManager(), "FilterDialogFragment");
     }
 
     private GenericAdapter<Apartment> initializeRecyclerView() {

@@ -14,4 +14,9 @@
     <string name="write_complaint_menu_item">Write Complaint</string>
     <string name="send_complaint_button">Send Complaint</string>
     <string name="complaint_label">Complaint</string>
+    <string name="city_label">City:</string>
+    <string name="rooms_count_label">Number of rooms:</string>
+    <string name="price_label">Price per night (€):</string>
+    <string name="from_input_hint">from</string>
+    <string name="to_input_hint">to</string>
 </resources>
