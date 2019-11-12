@@ -32,11 +32,13 @@ public class Appbar {
     /**
      * Adds go back arrow button
      */
-    void addBackButton() {
+    public void addBackButton() {
         show();
         if (((AppCompatActivity) this.context).getSupportActionBar() != null) {
             ((AppCompatActivity) this.context).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             ((AppCompatActivity) this.context).getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
     }
+
+
 }

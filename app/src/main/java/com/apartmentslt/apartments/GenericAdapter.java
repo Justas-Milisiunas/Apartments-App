@@ -15,7 +15,7 @@ public abstract class GenericAdapter<T> extends RecyclerView.Adapter<RecyclerVie
     private LayoutInflater mInflater;
     protected Context mContext;
 
-    GenericAdapter(Context context) {
+    protected GenericAdapter(Context context) {
         this.dataList = new LinkedList<>();
         this.mInflater = LayoutInflater.from(context);
         this.mContext = context;
@@ -105,7 +105,7 @@ public abstract class GenericAdapter<T> extends RecyclerView.Adapter<RecyclerVie
     /**
      * Class for holding inflated layout
      */
-    class ItemViewHolder extends RecyclerView.ViewHolder {
+    public class ItemViewHolder extends RecyclerView.ViewHolder {
         private View itemView;
 
         ItemViewHolder(View itemView) {
@@ -118,7 +118,7 @@ public abstract class GenericAdapter<T> extends RecyclerView.Adapter<RecyclerVie
          * @param id Component id
          * @return Found component
          */
-        View getComponent(int id) {
+        public View getComponent(int id) {
             return this.itemView.findViewById(id);
         }
     }

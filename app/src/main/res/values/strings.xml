@@ -8,4 +8,27 @@
     <string name="last_name_hint">Last name</string>
     <string name="register_button">Register</string>
     <string name="apartment_image_description">Apartment image</string>
+    <string name="book_button">Book</string>
+    <string name="booking_cancel_button">Booking cancel</string>
+    <string name="apartments_menu_item">Apartments</string>
+    <string name="write_complaint_menu_item">Write Complaint</string>
+    <string name="send_complaint_button">Send Complaint</string>
+    <string name="complaint_label">Complaint</string>
+    <string name="city_label">City:</string>
+    <string name="rooms_count_label">Number of rooms:</string>
+    <string name="price_label">Price per night (€):</string>
+    <string name="from_input_hint">from</string>
+    <string name="to_input_hint">to</string>
+    <string name="toolbar_filter_button">Filter</string>
+    <string name="main_window_worker">Main Window- Worker</string>
+    <string name="profile_window">Profile Window</string>
+    <string name="job_list_element">Job List Element</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="delete_profile">Delete Profile</string>
+    <string name="job_details_window">Job Details Window</string>
+    <string name="jobs_history_window">Jobs History Window</string>
+    <string name="report_window">Report Window</string>
+    <string name="generate_report">Generate Report</string>
+    <string name="profile_edit_window">Profile Edit Window</string>
+    <string name="profile_remove_window">Profile Remove Window</string>
 </resources>

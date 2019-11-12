@@ -1,25 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.apartmentslt.apartments">
 
     <application
         android:allowBackup="true"
+        android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".worker.JobsListActivity"
-            android:label="Jobs"></activity>
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".ProfileRemoveActivity"
+            android:label="Remove Profile"></activity>
+        <activity android:name=".ProfileEditActivity"
+            android:label="Edit Profile"/>
         <activity
-            android:name=".ApartmentDetailsActivity"
+            android:name=".worker.ReportActivity"
+            android:label="Report" />
+        <activity
+            android:name=".worker.JobDetailsActivity"
+            android:label="Job Details" />
+        <activity
+            android:name=".worker.JobsHistoryActivity"
+            android:label="Jobs History" />
+        <activity
+            android:name=".ProfileActivity"
+            android:label="Profile" />
+        <activity
+            android:name=".worker.JobsListActivity"
+            android:label="Jobs" />
+        <activity
+            android:name=".tenant.activities.WriteComplaintActivity"
+            android:label="Complaint"
+            android:parentActivityName=".tenant.activities.ApartmentsListActivity"
+            tools:targetApi="jelly_bean" />
+        <activity
+            android:name=".tenant.activities.ApartmentDetailsActivity"
             android:label="Apartment"
-            android:parentActivityName=".ApartmentsListActivity"></activity>
-        <activity android:name=".ApartmentsListActivity" />
+            android:parentActivityName=".tenant.activities.ApartmentsListActivity"
+            tools:targetApi="jelly_bean" />
+        <activity android:name=".tenant.activities.ApartmentsListActivity" />
         <activity
             android:name=".RegisterActivity"
             android:label="Registration"
-            android:parentActivityName=".LoginActivity" />
+            android:parentActivityName=".LoginActivity"
+            tools:targetApi="jelly_bean" />
         <activity
             android:name=".LoginActivity"
             android:label="Login">

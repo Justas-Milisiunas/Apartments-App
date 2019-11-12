@@ -7,9 +7,9 @@
     tools:context=".LoginActivity">
 
     <include
+        layout="@layout/toolbar"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        layout="@layout/toolbar" />
+        android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/textView"
@@ -27,30 +27,30 @@
         android:layout_width="@dimen/edit_text"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_big"
+        android:autofillHints="emailAddress"
         android:ems="10"
         android:hint="@string/email_hint"
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        android:autofillHints="emailAddress" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
         android:id="@+id/password"
         android:layout_width="@dimen/edit_text"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_small"
+        android:autofillHints="password"
         android:ems="10"
         android:hint="@string/password_hint"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailAddress"
-        android:autofillHints="password" />
+        app:layout_constraintTop_toBottomOf="@+id/emailAddress" />
 
     <Button
         android:id="@+id/login"
-        style="@style/ButtonColor"
+        style="@style/Widget.MaterialComponents.Button"
         android:layout_width="@dimen/edit_text"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_small"
@@ -62,7 +62,7 @@
 
     <Button
         android:id="@+id/register"
-        style="@style/ButtonColor"
+        style="@style/Widget.MaterialComponents.Button"
         android:layout_width="@dimen/edit_text"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_small"

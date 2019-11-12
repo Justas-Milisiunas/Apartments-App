@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import com.apartmentslt.apartments.tenant.activities.ApartmentsListActivity;
+
 public class RegisterActivity extends AppCompatActivity {
 
     @Override
@@ -36,27 +38,27 @@ public class RegisterActivity extends AppCompatActivity {
 
     /**
      * Caller after register button press
+     *
      * @param view View
      */
     public void register(View view) {
         Spinner spinner = view.findViewById(R.id.roles);
         switch (spinner.getSelectedItemPosition()) {
             case 0:
-                // Owner
+                // TODO: Start owner main activity
 
-                finish();
                 break;
             case 1:
                 // Tenant
                 Intent intent = new Intent(this, ApartmentsListActivity.class);
                 startActivity(intent);
-                finish();
                 break;
             case 2:
-                // Worker
+                // TODO: Start worker main activity
 
-                finish();
                 break;
         }
+
+        finish();
     }
 }
