@@ -16,6 +16,7 @@
         <activity
             android:name=".tenant.activities.WriteComplaintActivity"
             android:parentActivityName=".tenant.activities.ApartmentsListActivity"
+            android:label="Complaint"
             tools:targetApi="jelly_bean" />
         <activity
             android:name=".tenant.activities.ApartmentDetailsActivity"

@@ -21,7 +21,6 @@ public class WriteComplaintActivity extends AppCompatActivity implements BottomN
 
         // Adds toolbar
         Appbar toolbar = new Appbar(this, R.id.toolbar, getTitle().toString());
-        toolbar.addBackButton();
         toolbar.show();
 
         // Adds bottom navigation bar

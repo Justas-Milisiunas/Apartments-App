@@ -39,4 +39,6 @@ public class Appbar {
             ((AppCompatActivity) this.context).getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
     }
+
+
 }

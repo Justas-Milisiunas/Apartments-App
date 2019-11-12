@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,8 +23,11 @@ import com.apartmentslt.apartments.models.Apartment;
 import com.apartmentslt.apartments.models.ApartmentStatus;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.zip.Inflater;
+
 public class ApartmentsListActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     GenericAdapter<Apartment> mAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,17 +45,10 @@ public class ApartmentsListActivity extends AppCompatActivity implements BottomN
         if (bottomNavigationView != null) {
             bottomNavigationView.setOnNavigationItemSelectedListener(this);
             bottomNavigationView.getMenu().findItem(R.id.navigation_apartments_list).setEnabled(false); // Disable apartments list button
-        } else  {
+        } else {
             Toast.makeText(this, "Bottom navigation bar could not be loaded", Toast.LENGTH_SHORT).show();
         }
 
-        // Load filtering dialog
-        createFilteringDialog();
-    }
-
-    private void createFilteringDialog() {
-        FilterDialog filterDialog = new FilterDialog();
-        filterDialog.show(getSupportFragmentManager(), "FilterDialogFragment");
     }
 
     private GenericAdapter<Apartment> initializeRecyclerView() {
@@ -100,6 +98,7 @@ public class ApartmentsListActivity extends AppCompatActivity implements BottomN
     /**
      * Bottom navigation bar clicked menu items listener
      * TODO: Add bottom navigation bar functionality
+     *
      * @param menuItem Clicked menu item
      * @return true
      */
@@ -114,5 +113,22 @@ public class ApartmentsListActivity extends AppCompatActivity implements BottomN
                 return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.apartments_list_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.action_filter) {
+            FilterDialog filterDialog = new FilterDialog();
+            filterDialog.show(getSupportFragmentManager(), "FilterDialogFragment");
+        }
+
+        return true;
     }
 }

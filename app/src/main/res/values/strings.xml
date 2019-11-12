@@ -19,4 +19,5 @@
     <string name="price_label">Price per night (€):</string>
     <string name="from_input_hint">from</string>
     <string name="to_input_hint">to</string>
+    <string name="toolbar_filter_button">Filter</string>
 </resources>
