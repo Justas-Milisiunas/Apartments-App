@@ -8,11 +8,11 @@ import androidx.appcompat.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-class Appbar {
+public class Appbar {
     private Context context;
     private Toolbar toolbar;
 
-    Appbar(Context context, int toolbarId, String title) {
+    public Appbar(Context context, int toolbarId, String title) {
         this.context = context;
 
         this.toolbar = ((AppCompatActivity) context).findViewById(toolbarId);
@@ -25,7 +25,7 @@ class Appbar {
     /**
      * Shows toolbar at the top
      */
-    void show() {
+    public void show() {
         ((AppCompatActivity) context).setSupportActionBar(this.toolbar);
     }
 

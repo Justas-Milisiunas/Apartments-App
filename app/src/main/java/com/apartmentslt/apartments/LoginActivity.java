@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import com.apartmentslt.apartments.worker.JobsListActivity;
+
 public class LoginActivity extends AppCompatActivity {
     EditText email;
     EditText password;
@@ -36,13 +38,14 @@ public class LoginActivity extends AppCompatActivity {
                 finish();
                 break;
             case "tenant" :
-                Intent intent = new Intent(this, ApartmentsListActivity.class);
-                startActivity(intent);
+                Intent tenantIntent = new Intent(this, ApartmentsListActivity.class);
+                startActivity(tenantIntent);
                 finish();
                 break;
             case "worker" :
                 // TODO: Start worker main activity
-
+                Intent workerIntent = new Intent(this, JobsListActivity.class);
+                startActivity(workerIntent);
                 finish();
                 break;
         }
