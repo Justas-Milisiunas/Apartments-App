@@ -7,4 +7,5 @@
     <color name="cancelButtonColor">#FF0000</color>
     <color name="textBackground">#80000000</color>
     <color name="white">#FFF</color>
+    <color name="nav_bar_used_item">#fcba03</color>
 </resources>

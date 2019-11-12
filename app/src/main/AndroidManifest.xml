@@ -10,9 +10,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".tenant.activities.WriteComplaintActivity"
-            android:parentActivityName=".tenant.activities.ApartmentsListActivity"/>
+        tools:ignore="GoogleAppIndexingWarning"
+        android:fullBackupContent="true">
+
+        <activity
+            android:name=".tenant.activities.WriteComplaintActivity"
+            android:parentActivityName=".tenant.activities.ApartmentsListActivity"
+            tools:targetApi="jelly_bean" />
         <activity
             android:name=".tenant.activities.ApartmentDetailsActivity"
             android:label="Apartment"

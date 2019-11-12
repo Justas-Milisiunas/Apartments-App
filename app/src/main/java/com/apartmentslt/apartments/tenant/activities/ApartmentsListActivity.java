@@ -20,7 +20,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class ApartmentsListActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     GenericAdapter<Apartment> mAdapter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +36,7 @@ public class ApartmentsListActivity extends AppCompatActivity implements BottomN
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_toolbar);
         if (bottomNavigationView != null) {
             bottomNavigationView.setOnNavigationItemSelectedListener(this);
+            bottomNavigationView.getMenu().findItem(R.id.navigation_apartments_list).setEnabled(false); // Disable apartments list button
         } else  {
             Toast.makeText(this, "Bottom navigation bar could not be loaded", Toast.LENGTH_SHORT).show();
         }
@@ -96,11 +96,11 @@ public class ApartmentsListActivity extends AppCompatActivity implements BottomN
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.navigation_apartments_list:
-                break;
+                return true;
             case R.id.navigation_write_complaint:
                 Intent complaintIntent = new Intent(this, WriteComplaintActivity.class);
                 startActivity(complaintIntent);
-                break;
+                return true;
         }
         return false;
     }

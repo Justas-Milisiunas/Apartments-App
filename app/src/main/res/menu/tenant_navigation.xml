@@ -4,14 +4,12 @@
 
     <item
         android:id="@+id/navigation_apartments_list"
-        android:enabled="true"
         android:icon="@drawable/ic_view_list"
         android:title="@string/apartments_menu_item"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/navigation_write_complaint"
-        android:enabled="true"
         android:icon="@drawable/ic_create"
         android:title="@string/write_complaint_menu_item"
         app:showAsAction="ifRoom" />

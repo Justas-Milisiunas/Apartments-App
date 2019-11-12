@@ -28,6 +28,7 @@ public class WriteComplaintActivity extends AppCompatActivity implements BottomN
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_toolbar);
         if (bottomNavigationView != null) {
             bottomNavigationView.setOnNavigationItemSelectedListener(this);
+            bottomNavigationView.getMenu().findItem(R.id.navigation_write_complaint).setEnabled(false); // Disable write complaint button
         } else  {
             Toast.makeText(this, "Bottom navigation bar could not be loaded", Toast.LENGTH_SHORT).show();
         }
