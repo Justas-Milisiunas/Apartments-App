@@ -50,7 +50,7 @@
 
     <Button
         android:id="@+id/login"
-        style="@style/ButtonColor"
+        style="@style/Widget.MaterialComponents.Button"
         android:layout_width="@dimen/edit_text"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_small"
@@ -62,7 +62,7 @@
 
     <Button
         android:id="@+id/register"
-        style="@style/ButtonColor"
+        style="@style/Widget.MaterialComponents.Button"
         android:layout_width="@dimen/edit_text"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_small"
