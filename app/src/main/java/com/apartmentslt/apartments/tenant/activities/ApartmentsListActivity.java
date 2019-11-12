@@ -51,6 +51,10 @@ public class ApartmentsListActivity extends AppCompatActivity implements BottomN
 
     }
 
+    /**
+     * Initializes recycler view for displaying apartments data
+     * @return Created recycler view adapter
+     */
     private GenericAdapter<Apartment> initializeRecyclerView() {
         RecyclerView mRecyclerView = findViewById(R.id.apartments_list);
         GenericAdapter<Apartment> apartmentsAdapter = new GenericAdapter<Apartment>(this) {
@@ -115,6 +119,11 @@ public class ApartmentsListActivity extends AppCompatActivity implements BottomN
         return false;
     }
 
+    /**
+     * Inflates toolbar menu items for the toolbar
+     * @param menu Menu
+     * @return true if inflated successfully
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
@@ -122,6 +131,12 @@ public class ApartmentsListActivity extends AppCompatActivity implements BottomN
         return true;
     }
 
+    /**
+     * Menu items click listener
+     * Shows filter dialog after pressing filter icon
+     * @param item Selected menu item
+     * @return true if commands initiated successfully
+     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.action_filter) {

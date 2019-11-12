@@ -17,6 +17,11 @@ import androidx.fragment.app.DialogFragment;
 import com.apartmentslt.apartments.R;
 
 public class FilterDialog extends DialogFragment {
+    /**
+     * Inflates custom dialog layout, adds positive and negative buttons
+     * @param savedInstanceState savedInstance
+     * @return created dialog
+     */
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {

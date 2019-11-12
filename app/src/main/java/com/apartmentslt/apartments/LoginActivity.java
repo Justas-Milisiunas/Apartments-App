@@ -25,28 +25,39 @@ public class LoginActivity extends AppCompatActivity {
         toolbar.show();
     }
 
+    /**
+     * Start register activity after pressing ,,Register" button
+     *
+     * @param view Current view
+     */
     public void register(View view) {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * Checks user's login information. If user login information is valid opens
+     * activity based on user's role
+     * TODO: Add validation
+     *
+     * @param view Current view
+     */
     public void login(View view) {
         switch (email.getText().toString().toLowerCase()) {
             case "owner":
                 // TODO: Start owner main activity
 
-                finish();
                 break;
-            case "tenant" :
+            case "tenant":
                 Intent intent = new Intent(this, ApartmentsListActivity.class);
                 startActivity(intent);
-                finish();
                 break;
-            case "worker" :
+            case "worker":
                 // TODO: Start worker main activity
 
-                finish();
                 break;
         }
+
+        finish();
     }
 }
