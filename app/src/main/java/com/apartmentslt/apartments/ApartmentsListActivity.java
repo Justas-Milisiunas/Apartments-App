@@ -67,6 +67,10 @@ public class ApartmentsListActivity extends AppCompatActivity implements BottomN
         return apartmentsAdapter;
     }
 
+    /**
+     * Loads and adds data to the list
+     * TODO: Load data from backend API
+     */
     private void loadData() {
         Apartment demo = new Apartment(50, 3, 15, "Studentu g 60, Kaunas", ApartmentStatus.EMPTY, "Good apartment");
         this.mAdapter.addItem(demo);
@@ -77,10 +81,15 @@ public class ApartmentsListActivity extends AppCompatActivity implements BottomN
         this.mAdapter.addItem(demo);
     }
 
+    /**
+     * Bottom navigation bar clicked menu items listener
+     * TODO: Add bottom navigation bar functionality
+     * @param menuItem Clicked menu item
+     * @return true
+     */
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
-            // TODO: Add bottom navigation bar functionality
             case R.id.navigation_apartments_list:
                 break;
             case R.id.navigation_write_complaint:
