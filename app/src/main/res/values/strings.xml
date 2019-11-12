@@ -12,4 +12,6 @@
     <string name="booking_cancel_button">Booking cancel</string>
     <string name="apartments_menu_item">Apartments</string>
     <string name="write_complaint_menu_item">Write Complaint</string>
+    <string name="send_complaint_button">Send Complaint</string>
+    <string name="complaint_label">Complaint</string>
 </resources>
