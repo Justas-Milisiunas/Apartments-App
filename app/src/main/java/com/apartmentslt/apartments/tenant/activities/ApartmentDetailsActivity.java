@@ -1,4 +1,4 @@
-package com.apartmentslt.apartments;
+package com.apartmentslt.apartments.tenant.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,10 +11,10 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.apartmentslt.apartments.Appbar;
+import com.apartmentslt.apartments.R;
 import com.apartmentslt.apartments.models.Apartment;
 
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 import java.util.Calendar;
 import java.util.Locale;
 

@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import com.apartmentslt.apartments.tenant.activities.ApartmentsListActivity;
+
 public class LoginActivity extends AppCompatActivity {
     EditText email;
     EditText password;

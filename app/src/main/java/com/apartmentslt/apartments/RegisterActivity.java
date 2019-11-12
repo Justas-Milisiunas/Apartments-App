@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import com.apartmentslt.apartments.tenant.activities.ApartmentsListActivity;
+
 public class RegisterActivity extends AppCompatActivity {
 
     @Override

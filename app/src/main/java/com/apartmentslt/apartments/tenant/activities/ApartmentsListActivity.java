@@ -1,4 +1,4 @@
-package com.apartmentslt.apartments;
+package com.apartmentslt.apartments.tenant.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,13 +9,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.apartmentslt.apartments.Appbar;
+import com.apartmentslt.apartments.GenericAdapter;
+import com.apartmentslt.apartments.R;
 import com.apartmentslt.apartments.models.Apartment;
 import com.apartmentslt.apartments.models.ApartmentStatus;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import java.util.LinkedList;
 
 public class ApartmentsListActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     GenericAdapter<Apartment> mAdapter;
@@ -93,6 +93,7 @@ public class ApartmentsListActivity extends AppCompatActivity implements BottomN
             case R.id.navigation_apartments_list:
                 break;
             case R.id.navigation_write_complaint:
+
                 break;
         }
         return false;
