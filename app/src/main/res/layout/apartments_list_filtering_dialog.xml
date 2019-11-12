@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/city_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin"
+        android:text="@string/city_label"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/cities_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin"
+        android:spinnerMode="dialog"
+        app:layout_constraintStart_toEndOf="@id/city_label"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/rooms_count_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin"
+        android:text="@string/rooms_count_label"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/city_label" />
+
+    <Spinner
+        android:id="@+id/rooms_count_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin"
+        android:spinnerMode="dialog"
+        app:layout_constraintStart_toEndOf="@id/rooms_count_label"
+        app:layout_constraintTop_toBottomOf="@id/cities_spinner" />
+
+    <TextView
+        android:id="@+id/price_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin"
+        android:text="@string/price_label"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rooms_count_label" />
+
+    <EditText
+        android:id="@+id/from_price"
+        android:layout_width="65dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/from_input_hint"
+        android:importantForAutofill="no"
+        android:inputType="numberSigned"
+        app:layout_constraintBaseline_toBaselineOf="@+id/price_label"
+        app:layout_constraintStart_toEndOf="@id/price_label" />
+
+    <EditText
+        android:layout_width="65dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/to_input_hint"
+        android:importantForAutofill="no"
+        android:inputType="numberSigned"
+        app:layout_constraintBaseline_toBaselineOf="@+id/price_label"
+        app:layout_constraintStart_toEndOf="@id/from_price" />
+</androidx.constraintlayout.widget.ConstraintLayout>

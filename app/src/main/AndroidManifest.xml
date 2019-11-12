@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.apartmentslt.apartments">
 
     <application
@@ -8,8 +9,29 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning"
+        android:fullBackupContent="true">
+
+        <activity
+            android:name=".tenant.activities.WriteComplaintActivity"
+            android:parentActivityName=".tenant.activities.ApartmentsListActivity"
+            android:label="Complaint"
+            tools:targetApi="jelly_bean" />
+        <activity
+            android:name=".tenant.activities.ApartmentDetailsActivity"
+            android:label="Apartment"
+            android:parentActivityName=".tenant.activities.ApartmentsListActivity"
+            tools:targetApi="jelly_bean" />
+        <activity android:name=".tenant.activities.ApartmentsListActivity" />
+        <activity
+            android:name=".RegisterActivity"
+            android:label="Registration"
+            android:parentActivityName=".LoginActivity"
+            tools:targetApi="jelly_bean" />
+        <activity
+            android:name=".LoginActivity"
+            android:label="Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

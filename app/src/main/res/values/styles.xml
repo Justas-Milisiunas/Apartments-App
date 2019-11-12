@@ -1,11 +1,27 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+<!--    <style name="ButtonColor" parent="TextAppearance.AppCompat.Widget.Button.Borderless.Colored">-->
+<!--        <item name="android:background">@color/buttonColor</item>-->
+<!--        <item name="android:textColor">#FFFFFF</item>-->
+<!--    </style>-->
+
+<!--    <style name="Button.Cancel" parent="Widget.AppCompat.Button">-->
+<!--        <item name="android:background">@color/cancelButtonColor</item>-->
+<!--        <item name="android:textColor">#FFFFFF</item>-->
+<!--    </style>-->
+
+    <style name="Divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">?android:attr/listDivider</item>
     </style>
 
 </resources>

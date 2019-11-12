@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">Apartments</string>
+    <string name="email_hint">Email</string>
+    <string name="login_title">Login</string>
+    <string name="password_hint">Password</string>
+    <string name="registration_title">Registration</string>
+    <string name="first_name_hint">First name</string>
+    <string name="last_name_hint">Last name</string>
+    <string name="register_button">Register</string>
+    <string name="apartment_image_description">Apartment image</string>
+    <string name="book_button">Book</string>
+    <string name="booking_cancel_button">Booking cancel</string>
+    <string name="apartments_menu_item">Apartments</string>
+    <string name="write_complaint_menu_item">Write Complaint</string>
+    <string name="send_complaint_button">Send Complaint</string>
+    <string name="complaint_label">Complaint</string>
+    <string name="city_label">City:</string>
+    <string name="rooms_count_label">Number of rooms:</string>
+    <string name="price_label">Price per night (€):</string>
+    <string name="from_input_hint">from</string>
+    <string name="to_input_hint">to</string>
+    <string name="toolbar_filter_button">Filter</string>
 </resources>
