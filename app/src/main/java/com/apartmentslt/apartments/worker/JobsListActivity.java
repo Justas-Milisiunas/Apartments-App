@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.apartmentslt.apartments.Appbar;
-import com.apartmentslt.apartments.ProfileActivity;
+import com.apartmentslt.apartments.profile.activities.ProfileActivity;
 import com.apartmentslt.apartments.R;
 
 public class JobsListActivity extends AppCompatActivity {

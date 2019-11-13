@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.apartmentslt.apartments.worker.JobsListActivity;
+import com.apartmentslt.apartments.owner.activities.ApartmentsListWithAddButtonActivity;
 import com.apartmentslt.apartments.tenant.activities.ApartmentsListActivity;
 
 public class LoginActivity extends AppCompatActivity {
@@ -44,18 +45,20 @@ public class LoginActivity extends AppCompatActivity {
      * @param view Current view
      */
     public void login(View view) {
+        Intent intent;
         switch (email.getText().toString().toLowerCase()) {
             case "owner":
                 // TODO: Start owner main activity
-
+                intent = new Intent(this, ApartmentsListWithAddButtonActivity.class);
+                startActivity(intent);
                 break;
             case "tenant":
-                Intent intent = new Intent(this, ApartmentsListActivity.class);
+                intent = new Intent(this, ApartmentsListActivity.class);
                 startActivity(intent);
                 break;
             case "worker":
-                Intent workerIntent = new Intent(this, JobsListActivity.class);
-                startActivity(workerIntent);
+                intent = new Intent(this, JobsListActivity.class);
+                startActivity(intent);
                 break;
         }
         finish();

@@ -1,4 +1,4 @@
-package com.apartmentslt.apartments;
+package com.apartmentslt.apartments.profile.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 

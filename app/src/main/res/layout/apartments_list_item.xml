@@ -32,7 +32,7 @@
         android:drawableLeft="@drawable/ic_location"
         android:drawablePadding="@dimen/padding"
         android:padding="@dimen/padding"
-        android:text="Studentu g. 60, Kaunas"
+        android:text="Studentų g. 60, Kaunas"
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
     <View
@@ -48,7 +48,7 @@
         android:drawableLeft="@drawable/ic_money"
         android:drawablePadding="@dimen/padding"
         android:padding="@dimen/padding"
-        android:text="10€ uz nakti"
+        android:text="10€ už naktį"
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
     <View

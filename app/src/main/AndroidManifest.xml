@@ -12,9 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ProfileRemoveActivity"
-            android:label="Remove Profile"></activity>
-        <activity android:name=".ProfileEditActivity"
+        <activity android:name=".profile.activities.ProfileRemoveActivity"
+            android:label="Remove Profile"/>
+        <activity android:name=".profile.activities.ProfileEditActivity"
             android:label="Edit Profile"/>
         <activity
             android:name=".worker.ReportActivity"
@@ -26,7 +26,7 @@
             android:name=".worker.JobsHistoryActivity"
             android:label="Jobs History" />
         <activity
-            android:name=".ProfileActivity"
+            android:name=".profile.activities.ProfileActivity"
             android:label="Profile" />
         <activity
             android:name=".worker.JobsListActivity"
@@ -56,6 +56,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!-- owner  block -->
+        <activity android:name=".owner.activities.ApartmentsListWithAddButtonActivity"
+            />
+        <activity android:name=".owner.activities.ApartmentDetailsWithEditButtonActivity"
+            android:label="Apartment"
+            android:parentActivityName=".owner.activities.ApartmentsListWithAddButtonActivity"
+            tools:targetApi="jelly_bean" />
+        <activity android:name=".owner.activities.GenerateSummaryActivity"
+            android:label="Summary"
+            android:parentActivityName=".owner.activities.ApartmentsListWithAddButtonActivity"
+            tools:targetApi="jelly_bean" />
+        <activity android:name=".owner.activities.AddApartmentActivity"
+            android:label="Apartment"
+            android:parentActivityName=".owner.activities.ApartmentsListWithAddButtonActivity"
+            tools:targetApi="jelly_bean"/>
+        <activity android:name=".owner.activities.ReadComplaintsActivity"
+            android:label="Complaints"
+            android:parentActivityName=".owner.activities.ApartmentsListWithAddButtonActivity"
+            tools:targetApi="jelly_bean"/>
     </application>
 
 </manifest>

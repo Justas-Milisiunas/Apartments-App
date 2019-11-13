@@ -1,4 +1,4 @@
-package com.apartmentslt.apartments.tenant.activities;
+package com.apartmentslt.apartments.owner.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,18 +22,23 @@ import com.apartmentslt.apartments.GenericAdapter;
 import com.apartmentslt.apartments.R;
 import com.apartmentslt.apartments.models.Apartment;
 import com.apartmentslt.apartments.models.ApartmentStatus;
+import com.apartmentslt.apartments.models.Complaint;
 import com.apartmentslt.apartments.profile.activities.ProfileActivity;
+import com.apartmentslt.apartments.tenant.activities.ApartmentDetailsActivity;
+import com.apartmentslt.apartments.tenant.activities.FilterDialog;
+import com.apartmentslt.apartments.tenant.activities.WriteComplaintActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.zip.Inflater;
 
-public class ApartmentsListActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
-    GenericAdapter<Apartment> mAdapter;
+public class ReadComplaintsActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+    GenericAdapter<Complaint> mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_apartments_list);
+        setContentView(R.layout.activity_read_complaints);
 
         mAdapter = initializeRecyclerView();
         loadData();
@@ -41,11 +47,12 @@ public class ApartmentsListActivity extends AppCompatActivity implements BottomN
         Appbar toolbar = new Appbar(this, R.id.toolbar, getTitle().toString());
         toolbar.show();
 
+
         // Add bottom navigation bar
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_toolbar);
         if (bottomNavigationView != null) {
             bottomNavigationView.setOnNavigationItemSelectedListener(this);
-            bottomNavigationView.getMenu().findItem(R.id.navigation_apartments_list).setEnabled(false); // Disable apartments list button
+            bottomNavigationView.getMenu().findItem(R.id.navigation_read_complaint).setEnabled(false); // Disable apartments list button
         } else {
             Toast.makeText(this, "Bottom navigation bar could not be loaded", Toast.LENGTH_SHORT).show();
         }
@@ -56,24 +63,24 @@ public class ApartmentsListActivity extends AppCompatActivity implements BottomN
      * Initializes recycler view for displaying apartments data
      * @return Created recycler view adapter
      */
-    private GenericAdapter<Apartment> initializeRecyclerView() {
-        RecyclerView mRecyclerView = findViewById(R.id.apartments_list);
-        GenericAdapter<Apartment> apartmentsAdapter = new GenericAdapter<Apartment>(this) {
+    private GenericAdapter<Complaint> initializeRecyclerView() {
+        RecyclerView mRecyclerView = findViewById(R.id.complaint_list);
+        GenericAdapter<Complaint> apartmentsAdapter = new GenericAdapter<Complaint>(this) {
             @Override
             public int getLayoutId() {
-                return R.layout.apartments_list_item;
+                return R.layout.complaint_list_item;
             }
 
             @Override
-            public void onBindData(Apartment model, int position, ItemViewHolder viewHolder) {
+            public void onBindData(Complaint model, int position, ItemViewHolder viewHolder) {
                 TextView address = ((TextView) viewHolder.getComponent(R.id.address));
                 address.setText(model.getAddress());
             }
 
             @Override
-            public void onClick(Apartment item, int position) {
+            public void onClick(Complaint item, int position) {
                 Intent intent = new Intent(getApplicationContext(), ApartmentDetailsActivity.class);
-                intent.putExtra(ApartmentDetailsActivity.APARTMENT_DATA_KEY, item);
+               // intent.putExtra(ApartmentDetailsActivity.APARTMENT_DATA_KEY, item);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
                 getBaseContext().startActivity(intent);
@@ -91,7 +98,8 @@ public class ApartmentsListActivity extends AppCompatActivity implements BottomN
      * TODO: Load data from backend API
      */
     private void loadData() {
-        Apartment demo = new Apartment(50, 3, 15, "Studentų g 60, Kaunas", ApartmentStatus.EMPTY, "Good apartment");
+        Complaint demo = new Complaint(
+                "Jonas", "Studentu g 60, Kaunas", "Neveikia vandentiekis");
         this.mAdapter.addItem(demo);
         this.mAdapter.addItem(demo);
         this.mAdapter.addItem(demo);
@@ -109,12 +117,18 @@ public class ApartmentsListActivity extends AppCompatActivity implements BottomN
      */
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        Intent intent;
         switch (menuItem.getItemId()) {
             case R.id.navigation_apartments_list:
+                finish();
+
                 return true;
-            case R.id.navigation_write_complaint:
-                Intent complaintIntent = new Intent(this, WriteComplaintActivity.class);
-                startActivity(complaintIntent);
+            case R.id.navigation_read_complaint:
+;
+                return true;
+            case R.id.navigation_summary:
+                intent = new Intent(this, GenerateSummaryActivity.class);
+                startActivity(intent);
                 return true;
         }
         return false;
@@ -128,7 +142,7 @@ public class ApartmentsListActivity extends AppCompatActivity implements BottomN
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.apartments_list_menu, menu);
+        menuInflater.inflate(R.menu.profile_menu, menu);
         return true;
     }
 
@@ -140,10 +154,6 @@ public class ApartmentsListActivity extends AppCompatActivity implements BottomN
      */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.action_filter) {
-            FilterDialog filterDialog = new FilterDialog();
-            filterDialog.show(getSupportFragmentManager(), "FilterDialogFragment");
-        }
         if (item.getItemId() == R.id.action_profile) {
             Intent intent = new Intent(this, ProfileActivity.class);
             startActivity(intent);

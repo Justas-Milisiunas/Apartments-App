@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/navigation_apartments_list"
+        android:icon="@drawable/ic_view_list"
+        android:title="@string/apartments_menu_item"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/navigation_read_complaint"
+        android:icon="@drawable/ic_create"
+        android:title="@string/read_complaint_menu_item"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/navigation_summary"
+        android:icon="@drawable/ic_description"
+        android:title="@string/generate_summary_menu_item"
+        app:showAsAction="ifRoom" />
+</menu>

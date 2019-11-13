@@ -1,18 +1,17 @@
-package com.apartmentslt.apartments.tenant.activities;
+package com.apartmentslt.apartments.owner.activities;
+
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,18 +20,20 @@ import com.apartmentslt.apartments.GenericAdapter;
 import com.apartmentslt.apartments.R;
 import com.apartmentslt.apartments.models.Apartment;
 import com.apartmentslt.apartments.models.ApartmentStatus;
+import com.apartmentslt.apartments.tenant.activities.ApartmentDetailsActivity;
+import com.apartmentslt.apartments.tenant.activities.FilterDialog;
 import com.apartmentslt.apartments.profile.activities.ProfileActivity;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.zip.Inflater;
-
-public class ApartmentsListActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class ApartmentsListWithAddButtonActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     GenericAdapter<Apartment> mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_apartments_list);
+        setContentView(R.layout.activity_apartments_list_with_add);
 
         mAdapter = initializeRecyclerView();
         loadData();
@@ -40,6 +41,19 @@ public class ApartmentsListActivity extends AppCompatActivity implements BottomN
         // Add top toolbar
         Appbar toolbar = new Appbar(this, R.id.toolbar, getTitle().toString());
         toolbar.show();
+
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), AddApartmentActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                //intent.putExtra(ApartmentDetailsActivity.APARTMENT_DATA_KEY, item);
+                //Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG)
+                       // .setAction("Action", null).show();
+            }
+        });
 
         // Add bottom navigation bar
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_toolbar);
@@ -72,7 +86,7 @@ public class ApartmentsListActivity extends AppCompatActivity implements BottomN
 
             @Override
             public void onClick(Apartment item, int position) {
-                Intent intent = new Intent(getApplicationContext(), ApartmentDetailsActivity.class);
+                Intent intent = new Intent(getApplicationContext(), ApartmentDetailsWithEditButtonActivity.class);
                 intent.putExtra(ApartmentDetailsActivity.APARTMENT_DATA_KEY, item);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
@@ -109,12 +123,18 @@ public class ApartmentsListActivity extends AppCompatActivity implements BottomN
      */
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        Intent intent;
+
         switch (menuItem.getItemId()) {
             case R.id.navigation_apartments_list:
                 return true;
-            case R.id.navigation_write_complaint:
-                Intent complaintIntent = new Intent(this, WriteComplaintActivity.class);
-                startActivity(complaintIntent);
+            case R.id.navigation_read_complaint:
+                intent = new Intent(this, ReadComplaintsActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.navigation_summary:
+                intent = new Intent(this, GenerateSummaryActivity.class);
+                startActivity(intent);
                 return true;
         }
         return false;

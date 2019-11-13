@@ -12,6 +12,8 @@
     <string name="booking_cancel_button">Booking cancel</string>
     <string name="apartments_menu_item">Apartments</string>
     <string name="write_complaint_menu_item">Write Complaint</string>
+    <string name="read_complaint_menu_item">Read Complaints</string>
+    <string name="generate_summary_menu_item">Generate Summary</string>
     <string name="send_complaint_button">Send Complaint</string>
     <string name="complaint_label">Complaint</string>
     <string name="city_label">City:</string>

@@ -5,11 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.apartmentslt.apartments.Appbar;
 import com.apartmentslt.apartments.R;
+import com.apartmentslt.apartments.profile.activities.ProfileActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class WriteComplaintActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
@@ -49,5 +52,32 @@ public class WriteComplaintActivity extends AppCompatActivity implements BottomN
                 break;
         }
         return false;
+    }
+    /**
+     * Inflates toolbar menu items for the toolbar
+     * @param menu Menu
+     * @return true if inflated successfully
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.profile_menu, menu);
+        return true;
+    }
+
+    /**
+     * Menu items click listener
+     * Shows filter dialog after pressing filter icon
+     * @param item Selected menu item
+     * @return true if commands initiated successfully
+     */
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.action_profile) {
+            Intent intent = new Intent(this, ProfileActivity.class);
+            startActivity(intent);
+        }
+
+        return true;
     }
 }
