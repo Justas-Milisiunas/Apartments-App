@@ -5,18 +5,36 @@
 
     <application
         android:allowBackup="true"
+        android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning"
-        android:fullBackupContent="true">
-
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".profile.activities.ProfileRemoveActivity"
+            android:label="Remove Profile"/>
+        <activity android:name=".profile.activities.ProfileEditActivity"
+            android:label="Edit Profile"/>
+        <activity
+            android:name=".worker.ReportActivity"
+            android:label="Report" />
+        <activity
+            android:name=".worker.JobDetailsActivity"
+            android:label="Job Details" />
+        <activity
+            android:name=".worker.JobsHistoryActivity"
+            android:label="Jobs History" />
+        <activity
+            android:name=".profile.activities.ProfileActivity"
+            android:label="Profile" />
+        <activity
+            android:name=".worker.JobsListActivity"
+            android:label="Jobs" />
         <activity
             android:name=".tenant.activities.WriteComplaintActivity"
-            android:parentActivityName=".tenant.activities.ApartmentsListActivity"
             android:label="Complaint"
+            android:parentActivityName=".tenant.activities.ApartmentsListActivity"
             tools:targetApi="jelly_bean" />
         <activity
             android:name=".tenant.activities.ApartmentDetailsActivity"
@@ -38,6 +56,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!-- owner  block -->
+        <activity android:name=".owner.activities.ApartmentsListWithAddButtonActivity"
+            />
+        <activity android:name=".owner.activities.ApartmentDetailsWithEditButtonActivity"
+            android:label="Apartment"
+            android:parentActivityName=".owner.activities.ApartmentsListWithAddButtonActivity"
+            tools:targetApi="jelly_bean" />
+        <activity android:name=".owner.activities.GenerateSummaryActivity"
+            android:label="Summary"
+            android:parentActivityName=".owner.activities.ApartmentsListWithAddButtonActivity"
+            tools:targetApi="jelly_bean" />
+        <activity android:name=".owner.activities.AddApartmentActivity"
+            android:label="Apartment"
+            android:parentActivityName=".owner.activities.ApartmentsListWithAddButtonActivity"
+            tools:targetApi="jelly_bean"/>
+        <activity android:name=".owner.activities.ReadComplaintsActivity"
+            android:label="Complaints"
+            android:parentActivityName=".owner.activities.ApartmentsListWithAddButtonActivity"
+            tools:targetApi="jelly_bean"/>
     </application>
 
 </manifest>

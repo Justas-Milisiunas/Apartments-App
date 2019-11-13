@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/scrollView"
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -33,20 +34,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_super_small"
             android:onClick="bookApartment"
-            android:text="@string/book_button"
+            android:text="Check bookings"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/apartment_image" />
-
-        <Button
-            android:id="@+id/booking_cancel"
-            style="@style/Widget.MaterialComponents.Button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin"
-            android:layout_marginLeft="@dimen/margin_super_small"
-            android:layout_marginTop="@dimen/margin_super_small"
-            android:text="@string/booking_cancel_button"
-            app:layout_constraintStart_toEndOf="@+id/apartment_book"
             app:layout_constraintTop_toBottomOf="@+id/apartment_image" />
 
         <View
@@ -130,5 +119,17 @@
             app:layout_constraintBottom_toBottomOf="@+id/apartment_image"
             app:layout_constraintStart_toStartOf="@+id/apartment_image" />
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            android:clickable="true"
+            android:tint="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_create" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
