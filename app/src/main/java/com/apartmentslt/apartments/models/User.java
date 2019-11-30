@@ -21,31 +21,53 @@ public class User {
 
     public User(int idIsNaudotojas, String vardas, String elPastas, String pavarde, double balansas, int role) {
         changeData(idIsNaudotojas, vardas, elPastas, pavarde, balansas, role);
-//        this.idIsNaudotojas = idIsNaudotojas;
-//        this.vardas = vardas;
-//        this.elPastas = elPastas;
-//        this.pavarde = pavarde;
-//        this.balansas = balansas;
-//        this.role = role;
     }
 
     public User(User data) {
-//        this(data.getIdIsNaudotojas(), data.getVardas(), data.getElPastas(), data.getPavarde(), data.getBalansas(), data.getRole());
         changeData(data.getIdIsNaudotojas(), data.getVardas(), data.getElPastas(), data.getPavarde(), data.getBalansas(), data.getRole());
     }
 
+    /**
+     * Checks if user is owner
+     *
+     * @return True if owner, false if not
+     */
     public boolean isOwner() {
         return role == 0;
     }
 
+    /**
+     * Checks if user is tenant
+     *
+     * @return True if tenant, false if not
+     */
     public boolean isTenant() {
         return role == 1;
     }
 
+    /**
+     * Checks if user is worker
+     *
+     * @return True if worker, false if not
+     */
     public boolean isWorker() {
         return role == 2;
     }
 
+    /**
+     * Logouts user by removing its data from local storage
+     *
+     * @param sp Shared Preferences
+     */
+    public static void logout(SharedPreferences sp) {
+        sp.edit().remove(USER_DATA).apply();
+    }
+
+    /**
+     * Saves user's data to the local storage
+     *
+     * @param sp Shared Preferences
+     */
     public static void saveData(SharedPreferences sp) {
         SharedPreferences.Editor editor = sp.edit();
         Gson gson = new Gson();
@@ -55,9 +77,18 @@ public class User {
         editor.apply();
     }
 
-    public static void loadData(SharedPreferences sp) {
+    /**
+     * Loads user's data from the local storage
+     *
+     * @param sp Shared Preferences
+     * @return true if user exists, false if not
+     */
+    public static boolean loadData(SharedPreferences sp) {
         Gson gson = new Gson();
         String jsonData = sp.getString(USER_DATA, null);
+
+        if (jsonData == null)
+            return false;
 
         User data = gson.fromJson(jsonData, User.class);
         instance.setIdIsNaudotojas(data.getIdIsNaudotojas());
@@ -66,12 +97,29 @@ public class User {
         instance.setPavarde(data.getPavarde());
         instance.setBalansas(data.getBalansas());
         instance.setRole(data.getRole());
+
+        return true;
     }
 
+    /**
+     * Changes local user's data
+     *
+     * @param user New user data
+     */
     public static void changeData(User user) {
         changeData(user.getIdIsNaudotojas(), user.getVardas(), user.getElPastas(), user.getPavarde(), user.getBalansas(), user.getRole());
     }
 
+    /**
+     * Changes local user's data
+     *
+     * @param idIsNaudotojas id
+     * @param vardas         first name
+     * @param elPastas       email
+     * @param pavarde        last name
+     * @param balansas       balance
+     * @param role           role
+     */
     public static void changeData(int idIsNaudotojas, String vardas, String elPastas, String pavarde, double balansas, int role) {
         instance.setIdIsNaudotojas(idIsNaudotojas);
         instance.setVardas(vardas);
@@ -81,6 +129,11 @@ public class User {
         instance.setRole(role);
     }
 
+    /**
+     * Local user instance (For singleton)
+     *
+     * @return Local user
+     */
     public static User getInstance() {
         return instance;
     }
