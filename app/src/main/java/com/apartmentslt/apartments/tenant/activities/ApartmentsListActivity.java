@@ -38,8 +38,6 @@ public class ApartmentsListActivity extends AppCompatActivity implements BottomN
         mAdapter = initializeRecyclerView();
         loadData();
 
-        User user = User.getInstance();
-
         // Add top toolbar
         Appbar toolbar = new Appbar(this, R.id.toolbar, getTitle().toString());
         toolbar.show();
@@ -57,6 +55,7 @@ public class ApartmentsListActivity extends AppCompatActivity implements BottomN
 
     /**
      * Initializes recycler view for displaying apartments data
+     *
      * @return Created recycler view adapter
      */
     private GenericAdapter<Apartment> initializeRecyclerView() {
@@ -125,6 +124,7 @@ public class ApartmentsListActivity extends AppCompatActivity implements BottomN
 
     /**
      * Inflates toolbar menu items for the toolbar
+     *
      * @param menu Menu
      * @return true if inflated successfully
      */
@@ -138,6 +138,7 @@ public class ApartmentsListActivity extends AppCompatActivity implements BottomN
     /**
      * Menu items click listener
      * Shows filter dialog after pressing filter icon
+     *
      * @param item Selected menu item
      * @return true if commands initiated successfully
      */
@@ -154,4 +155,6 @@ public class ApartmentsListActivity extends AppCompatActivity implements BottomN
 
         return true;
     }
+
+
 }
