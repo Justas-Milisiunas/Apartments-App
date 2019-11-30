@@ -21,6 +21,7 @@ import com.apartmentslt.apartments.GenericAdapter;
 import com.apartmentslt.apartments.R;
 import com.apartmentslt.apartments.models.Apartment;
 import com.apartmentslt.apartments.models.ApartmentStatus;
+import com.apartmentslt.apartments.models.User;
 import com.apartmentslt.apartments.profile.activities.ProfileActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -36,6 +37,8 @@ public class ApartmentsListActivity extends AppCompatActivity implements BottomN
 
         mAdapter = initializeRecyclerView();
         loadData();
+
+        User user = User.getInstance();
 
         // Add top toolbar
         Appbar toolbar = new Appbar(this, R.id.toolbar, getTitle().toString());
