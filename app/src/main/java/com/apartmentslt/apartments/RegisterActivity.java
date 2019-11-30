@@ -41,6 +41,9 @@ public class RegisterActivity extends AppCompatActivity {
         toolbar.show();
     }
 
+    /**
+     * Finds all layout components used for data
+     */
     void findLayoutComponents() {
         this.firstName = findViewById(R.id.firstName);
         this.lastName = findViewById(R.id.lastName);
@@ -72,7 +75,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 //         If new user's data invalid shows toast messages
         if (!newUser.Valid()) {
-            Toast.makeText(this, "Bad login information", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Bad registration information", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -101,7 +104,7 @@ public class RegisterActivity extends AppCompatActivity {
                         User.changeData(user);
                         User.saveData(getSharedPreferences(User.USER_DATA_FILE, MODE_PRIVATE));
 
-                        Toast.makeText(getApplicationContext(), "Logged in successfully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Registered successfully", Toast.LENGTH_SHORT).show();
                         openMainWindow(User.getInstance().getRole());
                     }
                 } else {
