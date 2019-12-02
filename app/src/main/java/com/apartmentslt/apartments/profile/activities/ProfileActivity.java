@@ -6,11 +6,21 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.apartmentslt.apartments.Appbar;
+import com.apartmentslt.apartments.BuildConfig;
 import com.apartmentslt.apartments.LoginActivity;
 import com.apartmentslt.apartments.R;
 import com.apartmentslt.apartments.models.User;
+import com.apartmentslt.apartments.services.UserService;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class ProfileActivity extends AppCompatActivity {
@@ -29,11 +39,6 @@ public class ProfileActivity extends AppCompatActivity {
         startActivity(profileIntent);
     }
 
-    public void goRemoveProfile(View view) {
-        Intent profileIntent = new Intent(this, ProfileRemoveActivity.class);
-        startActivity(profileIntent);
-    }
-
     /**
      * Logs out user by removing it's data from local storage
      *
@@ -48,5 +53,46 @@ public class ProfileActivity extends AppCompatActivity {
         loginIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(loginIntent);
         finish();
+    }
+
+    /**
+     * Deletes user from the db
+     *
+     * @param view Current view
+     */
+    public void removeProfile(View view) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BuildConfig.API_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        UserService userService = retrofit.create(UserService.class);
+        final Call<ResponseBody> requestCall = userService.deleteProfile(User.getInstance().getIdIsNaudotojas());
+        requestCall.enqueue(new Callback<ResponseBody>() {
+            /**
+             * If request successful logouts user
+             * @param call Call
+             * @param response Request response
+             */
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(getApplicationContext(), "Profile removed successfully", Toast.LENGTH_SHORT).show();
+                    logoutUser(null);
+                } else {
+                    Toast.makeText(getApplicationContext(), response.message(), Toast.LENGTH_LONG).show();
+                }
+            }
+
+            /**
+             * If error shows toast message
+             * @param call
+             * @param t
+             */
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
