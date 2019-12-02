@@ -81,7 +81,7 @@ public class ApartmentsListWithAddButtonActivity extends AppCompatActivity imple
             @Override
             public void onBindData(Apartment model, int position, ItemViewHolder viewHolder) {
                 TextView address = ((TextView) viewHolder.getComponent(R.id.address));
-                address.setText(model.getAddress());
+                address.setText(model.getAdresas());
             }
 
             @Override
@@ -105,13 +105,13 @@ public class ApartmentsListWithAddButtonActivity extends AppCompatActivity imple
      * TODO: Load data from backend API
      */
     private void loadData() {
-        Apartment demo = new Apartment(50, 3, 15, "Studentų g 60, Kaunas", ApartmentStatus.EMPTY, "Good apartment");
-        this.mAdapter.addItem(demo);
-        this.mAdapter.addItem(demo);
-        this.mAdapter.addItem(demo);
-        this.mAdapter.addItem(demo);
-        this.mAdapter.addItem(demo);
-        this.mAdapter.addItem(demo);
+//        Apartment demo = new Apartment(50, 3, 15, "Studentų g 60, Kaunas", ApartmentStatus.EMPTY, "Good apartment");
+//        this.mAdapter.addItem(demo);
+//        this.mAdapter.addItem(demo);
+//        this.mAdapter.addItem(demo);
+//        this.mAdapter.addItem(demo);
+//        this.mAdapter.addItem(demo);
+//        this.mAdapter.addItem(demo);
     }
 
     /**

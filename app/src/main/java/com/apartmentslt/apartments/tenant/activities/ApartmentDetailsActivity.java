@@ -63,8 +63,7 @@ public class ApartmentDetailsActivity extends AppCompatActivity implements DateP
         if (intent.getExtras() != null) {
             apartment = ((Apartment) intent.getExtras().getSerializable(APARTMENT_DATA_KEY));
             if (apartment == null) {
-                Log.d(TAG, "Apartment object is null");
-                return null;
+                Toast.makeText(this, "Could not load apartment", Toast.LENGTH_LONG).show();
             }
         }
 
@@ -77,9 +76,11 @@ public class ApartmentDetailsActivity extends AppCompatActivity implements DateP
      * @param apartment Apartment
      */
     private void bindData(Apartment apartment) {
-        ((TextView) findViewById(R.id.address)).setText(apartment.getAddress());
-        // TODO: Finish binding
-//        ((TextView) findViewById(R.id.price)).setText();
+        ((TextView) findViewById(R.id.address)).setText(apartment.getAdresas());
+        ((TextView) findViewById(R.id.price)).setText(apartment.getKainaUzNakti() + " price per night");
+        ((TextView) findViewById(R.id.size)).setText(apartment.getDydis() + " m2");
+        ((TextView) findViewById(R.id.description)).setText(apartment.getAprasas());
+        // TODO: Finish binding rating
     }
 
     /**
