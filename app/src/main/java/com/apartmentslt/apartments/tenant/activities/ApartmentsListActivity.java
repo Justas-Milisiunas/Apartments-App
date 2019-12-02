@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +23,7 @@ import com.apartmentslt.apartments.R;
 import com.apartmentslt.apartments.models.Apartment;
 import com.apartmentslt.apartments.profile.activities.ProfileActivity;
 import com.apartmentslt.apartments.services.ApartmentsService;
+import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.chip.Chip;
 
@@ -99,10 +101,17 @@ public class ApartmentsListActivity extends AppCompatActivity implements BottomN
 
                 Chip rooms = ((Chip) viewHolder.getComponent(R.id.rooms));
                 rooms.setText(model.getKambaruSkaicius() + " kambariai");
+
+                ImageView image = ((ImageView) viewHolder.getComponent(R.id.apartment_image));
+                Glide.with(getApplicationContext())
+                        .load(model.getNuotraukaUrl())
+                        .error(R.drawable.ic_error)
+                        .into(image);
             }
 
             /**
              * Starts activity for showing apartments data
+             * TODO: Pass photo through intent
              * @param item Clicked item data
              * @param position Clicked item position in list
              */

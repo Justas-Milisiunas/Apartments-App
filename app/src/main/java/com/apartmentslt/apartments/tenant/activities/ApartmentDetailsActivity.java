@@ -8,12 +8,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.apartmentslt.apartments.Appbar;
 import com.apartmentslt.apartments.R;
 import com.apartmentslt.apartments.models.Apartment;
+import com.bumptech.glide.Glide;
 
 import java.util.Calendar;
 import java.util.Locale;
@@ -80,6 +82,12 @@ public class ApartmentDetailsActivity extends AppCompatActivity implements DateP
         ((TextView) findViewById(R.id.price)).setText(apartment.getKainaUzNakti() + " price per night");
         ((TextView) findViewById(R.id.size)).setText(apartment.getDydis() + " m2");
         ((TextView) findViewById(R.id.description)).setText(apartment.getAprasas());
+
+        ImageView image = findViewById(R.id.apartment_image);
+        Glide.with(getApplicationContext())
+                .load(apartment.getNuotraukaUrl())
+                .error(R.drawable.ic_error)
+                .into(image);
         // TODO: Finish binding rating
     }
 
