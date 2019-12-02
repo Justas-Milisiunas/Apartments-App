@@ -14,12 +14,12 @@ android {
     }
     buildTypes {
         debug {
-            buildConfigField "String", "API_URL", "\"http://192.168.1.68:5000\""
+            buildConfigField "String", "API_URL", "\"http://10.0.2.2:5000\""
         }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "API_URL", "\"https://localhost:5001\""
+            buildConfigField "String", "API_URL", "\"http://10.0.2.2:5000\""
         }
     }
 }
