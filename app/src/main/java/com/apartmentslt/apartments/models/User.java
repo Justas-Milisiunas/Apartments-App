@@ -4,7 +4,9 @@ import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     public static final String USER_DATA_FILE = "com.apartmentslt.USER_DATA_FILE";
     public static final String USER_DATA = USER_DATA_FILE + ".USER_DATA";
     private static final User instance = new User();

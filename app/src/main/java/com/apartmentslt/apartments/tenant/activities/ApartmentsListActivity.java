@@ -1,31 +1,37 @@
 package com.apartmentslt.apartments.tenant.activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.app.Dialog;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.apartmentslt.apartments.Appbar;
+import com.apartmentslt.apartments.BuildConfig;
 import com.apartmentslt.apartments.GenericAdapter;
 import com.apartmentslt.apartments.R;
 import com.apartmentslt.apartments.models.Apartment;
-import com.apartmentslt.apartments.models.ApartmentStatus;
-import com.apartmentslt.apartments.models.User;
 import com.apartmentslt.apartments.profile.activities.ProfileActivity;
+import com.apartmentslt.apartments.services.ApartmentsService;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.chip.Chip;
 
-import java.util.zip.Inflater;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApartmentsListActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     GenericAdapter<Apartment> mAdapter;
@@ -61,24 +67,56 @@ public class ApartmentsListActivity extends AppCompatActivity implements BottomN
     private GenericAdapter<Apartment> initializeRecyclerView() {
         RecyclerView mRecyclerView = findViewById(R.id.apartments_list);
         GenericAdapter<Apartment> apartmentsAdapter = new GenericAdapter<Apartment>(this) {
+            /**
+             * Each item layout id
+             * @return Layout id
+             */
             @Override
             public int getLayoutId() {
                 return R.layout.apartments_list_item;
             }
 
+            /**
+             * Binds current item data to layout components
+             * @param model Current item Item
+             * @param position Current item's position Position in list
+             * @param viewHolder Inflated layout view Layout view holder
+             */
+            @SuppressLint("SetTextI18n")
             @Override
             public void onBindData(Apartment model, int position, ItemViewHolder viewHolder) {
+                TextView name = ((TextView) viewHolder.getComponent(R.id.name));
+                name.setText(model.getPavadinimas());
+
                 TextView address = ((TextView) viewHolder.getComponent(R.id.address));
-                address.setText(model.getAddress());
+                address.setText(model.getAdresas());
+
+                TextView price = ((TextView) viewHolder.getComponent(R.id.price));
+                price.setText(model.getKainaUzNakti() + " per night");
+
+                TextView size = ((TextView) viewHolder.getComponent(R.id.size));
+                size.setText(String.valueOf(model.getDydis()));
+
+                Chip rooms = ((Chip) viewHolder.getComponent(R.id.rooms));
+                rooms.setText(model.getKambaruSkaicius() + " kambariai");
             }
 
+            /**
+             * Starts activity for showing apartments data
+             * @param item Clicked item data
+             * @param position Clicked item position in list
+             */
             @Override
             public void onClick(Apartment item, int position) {
                 Intent intent = new Intent(getApplicationContext(), ApartmentDetailsActivity.class);
-                intent.putExtra(ApartmentDetailsActivity.APARTMENT_DATA_KEY, item);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                try {
+                    intent.putExtra(ApartmentDetailsActivity.APARTMENT_DATA_KEY, item);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-                getBaseContext().startActivity(intent);
+                    getBaseContext().startActivity(intent);
+                } catch (Exception e) {
+                    Log.d("[ERROR]", e.getMessage());
+                }
             }
         };
 
@@ -90,21 +128,52 @@ public class ApartmentsListActivity extends AppCompatActivity implements BottomN
 
     /**
      * Loads and adds data to the list
-     * TODO: Load data from backend API
      */
     private void loadData() {
-        Apartment demo = new Apartment(50, 3, 15, "Studentų g 60, Kaunas", ApartmentStatus.EMPTY, "Good apartment");
-        this.mAdapter.addItem(demo);
-        this.mAdapter.addItem(demo);
-        this.mAdapter.addItem(demo);
-        this.mAdapter.addItem(demo);
-        this.mAdapter.addItem(demo);
-        this.mAdapter.addItem(demo);
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BuildConfig.API_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ApartmentsService apartmentsService = retrofit.create(ApartmentsService.class);
+        final Call<List<Apartment>> requestCall = apartmentsService.getAll();
+        requestCall.enqueue(new Callback<List<Apartment>>() {
+            /**
+             * If request to apartments API was successful loads apartments data
+             * @param call Call
+             * @param response Response
+             */
+            @Override
+            public void onResponse(Call<List<Apartment>> call, Response<List<Apartment>> response) {
+                if (response.isSuccessful()) {
+                    List<Apartment> apartments = response.body();
+                    if (apartments == null) {
+                        Toast.makeText(getApplicationContext(), "Could not load any apartments", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    for (Apartment apartment : apartments) {
+                        mAdapter.addItem(apartment);
+                    }
+                } else {
+                    Toast.makeText(getApplicationContext(), response.message(), Toast.LENGTH_LONG).show();
+                }
+            }
+
+            /**
+             * If request to apartments API was unsuccessful shows error message
+             * @param call Call
+             * @param t exception
+             */
+            @Override
+            public void onFailure(Call<List<Apartment>> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     /**
      * Bottom navigation bar clicked menu items listener
-     * TODO: Add bottom navigation bar functionality
      *
      * @param menuItem Clicked menu item
      * @return true
