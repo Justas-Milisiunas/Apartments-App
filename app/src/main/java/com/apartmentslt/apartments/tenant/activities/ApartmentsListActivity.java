@@ -21,6 +21,7 @@ import com.apartmentslt.apartments.GenericAdapter;
 import com.apartmentslt.apartments.R;
 import com.apartmentslt.apartments.models.Apartment;
 import com.apartmentslt.apartments.models.ApartmentStatus;
+import com.apartmentslt.apartments.models.User;
 import com.apartmentslt.apartments.profile.activities.ProfileActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -54,6 +55,7 @@ public class ApartmentsListActivity extends AppCompatActivity implements BottomN
 
     /**
      * Initializes recycler view for displaying apartments data
+     *
      * @return Created recycler view adapter
      */
     private GenericAdapter<Apartment> initializeRecyclerView() {
@@ -122,6 +124,7 @@ public class ApartmentsListActivity extends AppCompatActivity implements BottomN
 
     /**
      * Inflates toolbar menu items for the toolbar
+     *
      * @param menu Menu
      * @return true if inflated successfully
      */
@@ -135,6 +138,7 @@ public class ApartmentsListActivity extends AppCompatActivity implements BottomN
     /**
      * Menu items click listener
      * Shows filter dialog after pressing filter icon
+     *
      * @param item Selected menu item
      * @return true if commands initiated successfully
      */
@@ -151,4 +155,6 @@ public class ApartmentsListActivity extends AppCompatActivity implements BottomN
 
         return true;
     }
+
+
 }

@@ -11,11 +11,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".profile.activities.ProfileRemoveActivity"
-            android:label="Remove Profile"/>
-        <activity android:name=".profile.activities.ProfileEditActivity"
-            android:label="Edit Profile"/>
+        android:usesCleartextTraffic="true"
+        tools:ignore="GoogleAppIndexingWarning,UnusedAttribute">
+        <activity
+            android:name=".profile.activities.ProfileRemoveActivity"
+            android:label="Remove Profile" />
+        <activity
+            android:name=".profile.activities.ProfileEditActivity"
+            android:label="Edit Profile" />
         <activity
             android:name=".worker.ReportActivity"
             android:label="Report" />
@@ -57,24 +60,33 @@
             </intent-filter>
         </activity>
         <!-- owner  block -->
-        <activity android:name=".owner.activities.ApartmentsListWithAddButtonActivity"
-            />
-        <activity android:name=".owner.activities.ApartmentDetailsWithEditButtonActivity"
+        <activity android:name=".owner.activities.ApartmentsListWithAddButtonActivity" />
+        <activity
+            android:name=".owner.activities.ApartmentDetailsWithEditButtonActivity"
             android:label="Apartment"
             android:parentActivityName=".owner.activities.ApartmentsListWithAddButtonActivity"
             tools:targetApi="jelly_bean" />
-        <activity android:name=".owner.activities.GenerateSummaryActivity"
+        <activity
+            android:name=".owner.activities.GenerateSummaryActivity"
             android:label="Summary"
             android:parentActivityName=".owner.activities.ApartmentsListWithAddButtonActivity"
             tools:targetApi="jelly_bean" />
-        <activity android:name=".owner.activities.AddApartmentActivity"
+        <activity
+            android:name=".owner.activities.AddApartmentActivity"
             android:label="Apartment"
             android:parentActivityName=".owner.activities.ApartmentsListWithAddButtonActivity"
-            tools:targetApi="jelly_bean"/>
-        <activity android:name=".owner.activities.ReadComplaintsActivity"
+            tools:targetApi="jelly_bean" />
+        <activity
+            android:name=".owner.activities.ReadComplaintsActivity"
             android:label="Complaints"
             android:parentActivityName=".owner.activities.ApartmentsListWithAddButtonActivity"
-            tools:targetApi="jelly_bean"/>
+            tools:targetApi="jelly_bean" />
     </application>
+
+    <uses-permission
+        android:name="android.permission.INTERNET"
+        tools:ignore="ManifestOrder" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
 
 </manifest>

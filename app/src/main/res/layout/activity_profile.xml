@@ -23,20 +23,36 @@
         app:layout_constraintTop_toBottomOf="@+id/include" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/edit_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/edit_profile"
+        android:layout_marginStart="@dimen/margin_small"
+        android:layout_marginLeft="@dimen/margin_small"
+        android:layout_marginBottom="@dimen/margin_small"
         android:onClick="goEditProfile"
+        android:text="@string/edit_profile"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/logout_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/delete_profile"
+        android:onClick="logoutUser"
+        android:text="@string/logout_user"
+        app:layout_constraintBaseline_toBaselineOf="@+id/edit_profile"
+        app:layout_constraintEnd_toStartOf="@+id/delete_profile"
+        app:layout_constraintStart_toEndOf="@+id/edit_profile" />
+
+    <Button
+        android:id="@+id/delete_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_small"
+        android:layout_marginRight="@dimen/margin_small"
+        android:layout_marginBottom="@dimen/margin_small"
         android:onClick="goRemoveProfile"
+        android:text="@string/delete_profile"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
