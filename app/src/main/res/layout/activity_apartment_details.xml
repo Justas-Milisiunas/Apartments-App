@@ -19,7 +19,7 @@
         <ImageView
             android:id="@+id/apartment_image"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="250dp"
             android:contentDescription="@string/apartment_image_description"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"

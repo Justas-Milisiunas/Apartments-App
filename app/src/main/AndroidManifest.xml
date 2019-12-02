@@ -14,9 +14,6 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning,UnusedAttribute">
         <activity
-            android:name=".profile.activities.ProfileRemoveActivity"
-            android:label="Remove Profile" />
-        <activity
             android:name=".profile.activities.ProfileEditActivity"
             android:label="Edit Profile" />
         <activity

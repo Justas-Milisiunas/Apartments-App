@@ -8,7 +8,7 @@
     <ImageView
         android:id="@+id/apartment_image"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="250dp"
         android:scaleType="centerCrop"
         app:srcCompat="@drawable/images" />
 
@@ -72,8 +72,8 @@
         style="@style/Widget.MaterialComponents.Chip.Action"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
         android:layout_margin="@dimen/margin_small"
         android:text="2 kambariai"
         app:chipIcon="@drawable/ic_info" />
