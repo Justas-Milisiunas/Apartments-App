@@ -27,6 +27,7 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.chip.Chip;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -37,12 +38,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApartmentsListActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     GenericAdapter<Apartment> mAdapter;
+    List<Apartment> allApartments;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_apartments_list);
 
+        allApartments = new ArrayList<>();
         mAdapter = initializeRecyclerView();
         loadData();
 
@@ -162,8 +165,10 @@ public class ApartmentsListActivity extends AppCompatActivity implements BottomN
                     }
 
                     for (Apartment apartment : apartments) {
-                        mAdapter.addItem(apartment);
+                        allApartments.add(apartment);
                     }
+
+                    showApartments(allApartments);
                 } else {
                     Toast.makeText(getApplicationContext(), response.message(), Toast.LENGTH_LONG).show();
                 }
@@ -234,5 +239,100 @@ public class ApartmentsListActivity extends AppCompatActivity implements BottomN
         return true;
     }
 
+    /**
+     * Extracts all cities from apartments array
+     *
+     * @return Cities list
+     */
+    public List<String> getAllCities() {
+        List<String> cities = new ArrayList<>();
+        cities.add("");
+        for (Apartment apartment : allApartments) {
+            if (!cities.contains(apartment.getMiestas())) {
+                cities.add(apartment.getMiestas());
+            }
+        }
 
+        return cities;
+    }
+
+    /**
+     * Extracts available rooms numbers from apartments data
+     *
+     * @return Room numbers list
+     */
+    public List<String> getNumberOfRooms() {
+        List<String> roomNumbers = new ArrayList<>();
+        roomNumbers.add("");
+        for (Apartment apartment : allApartments) {
+            if (!roomNumbers.contains(String.valueOf(apartment.getKambaruSkaicius()))) {
+                roomNumbers.add(String.valueOf(apartment.getKambaruSkaicius()));
+            }
+        }
+
+        return roomNumbers;
+    }
+
+    /**
+     * Filters apartments by given dialog's filter options
+     * TODO: remove hardcoded price range end
+     *
+     * @param city      City name
+     * @param rooms     Number  of rooms
+     * @param priceFrom Price range start
+     * @param priceTo   Price range end
+     */
+    public void filterApartments(String city, String rooms, String priceFrom, String priceTo) {
+        List<Apartment> filteredApartments = new ArrayList<>();
+
+        Double priceStart = 0.0;
+        Double priceEnd = 10000.0;
+
+        if (!priceFrom.equals(""))
+            priceStart = Double.parseDouble(priceFrom);
+        if (!priceTo.equals(""))
+            priceEnd = Double.parseDouble(priceTo);
+
+
+        for (Apartment apartment : allApartments) {
+            boolean addApartment = false;
+            if (city.equals("") || apartment.getMiestas().equals(city)) {
+                addApartment = true;
+            }
+
+            if (!addApartment)
+                continue;
+
+            addApartment = false;
+            if (rooms.equals("") || String.valueOf(apartment.getKambaruSkaicius()).equals(rooms)) {
+                addApartment = true;
+            }
+
+            if (!addApartment)
+                continue;
+
+            if (apartment.getKainaUzNakti() >= priceStart && apartment.getKainaUzNakti() <= priceEnd)
+                filteredApartments.add(apartment);
+
+        }
+
+        showApartments(filteredApartments);
+    }
+
+    /**
+     * Adds given apartments to the recycler view  list
+     *
+     * @param apartments Apartments list
+     */
+    private void showApartments(List<Apartment> apartments) {
+        mAdapter.clear();
+        if (apartments.size() == 0)
+            Toast.makeText(this, "No apartments found", Toast.LENGTH_SHORT).show();
+        else
+            Toast.makeText(this, apartments.size() + " apartments found", Toast.LENGTH_SHORT).show();
+
+        for (Apartment apartment : apartments) {
+            mAdapter.addItem(apartment);
+        }
+    }
 }
