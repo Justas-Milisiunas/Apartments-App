@@ -26,6 +26,8 @@ import com.apartmentslt.apartments.services.ApartmentsService;
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.chip.Chip;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -142,9 +144,13 @@ public class ApartmentsListActivity extends AppCompatActivity implements BottomN
      * Loads and adds data to the list
      */
     private void loadData() {
+        Gson gson = new GsonBuilder()
+                .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+                .create();
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BuildConfig.API_URL)
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 
         ApartmentsService apartmentsService = retrofit.create(ApartmentsService.class);
