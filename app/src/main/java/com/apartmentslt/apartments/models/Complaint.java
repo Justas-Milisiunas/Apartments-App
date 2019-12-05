@@ -1,6 +1,8 @@
 package com.apartmentslt.apartments.models;
 
-public class Complaint {
+import java.io.Serializable;
+
+public class Complaint implements Serializable {
     private String pranesimas;
     private int FkButasidButas;
     private int FkNuomininkasidIsNaudotojas;
