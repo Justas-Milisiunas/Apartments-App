@@ -65,6 +65,7 @@
         app:layout_constraintStart_toEndOf="@id/price_label" />
 
     <EditText
+        android:id="@+id/to_price"
         android:layout_width="65dp"
         android:layout_height="wrap_content"
         android:hint="@string/to_input_hint"

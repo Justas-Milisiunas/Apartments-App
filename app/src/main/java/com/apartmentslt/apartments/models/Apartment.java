@@ -1,7 +1,5 @@
 package com.apartmentslt.apartments.models;
 
-import android.os.Parcelable;
-
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
@@ -10,7 +8,7 @@ import java.util.List;
 public class Apartment implements Serializable {
     private int dydis;
     private int kambaruSkaicius;
-//    private Date pridejimoData;
+    //    private Date pridejimoData;
     private double kainaUzNakti;
     private String adresas;
     private String nuotraukaUrl;
@@ -21,7 +19,7 @@ public class Apartment implements Serializable {
     private int busena;
     private int idButas;
     private int fkSavininkasidIsNaudotojas;
-    private Status busenaNavigation;
+    private Status status;
     private Owner savininkas;
     private List<Work> darbas;
     private List<RentPeriod> nuomosLaikotarpis;
@@ -49,7 +47,7 @@ public class Apartment implements Serializable {
         this.busena = busena;
         this.idButas = idButas;
         this.fkSavininkasidIsNaudotojas = fkSavininkasidIsNaudotojas;
-        this.busenaNavigation = busenaNavigation;
+        this.status = busenaNavigation;
         this.savininkas = savininkas;
         this.darbas = darbas;
         this.nuomosLaikotarpis = nuomosLaikotarpis;
@@ -106,10 +104,6 @@ public class Apartment implements Serializable {
         this.fkSavininkasidIsNaudotojas = fkSavininkasidIsNaudotojas;
     }
 
-    public void setBusenaNavigation(Status busenaNavigation) {
-        this.busenaNavigation = busenaNavigation;
-    }
-
     public void setSavininkas(Owner savininkas) {
         this.savininkas = savininkas;
     }
@@ -132,6 +126,10 @@ public class Apartment implements Serializable {
 
     public void setSkundas(List<Complaint> skundas) {
         this.skundas = skundas;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public int getDydis() {
@@ -182,8 +180,8 @@ public class Apartment implements Serializable {
         return fkSavininkasidIsNaudotojas;
     }
 
-    public Status getBusenaNavigation() {
-        return busenaNavigation;
+    public Status getStatus() {
+        return status;
     }
 
     public Owner getSavininkas() {
