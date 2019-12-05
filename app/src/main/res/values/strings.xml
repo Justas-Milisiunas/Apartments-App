@@ -34,4 +34,5 @@
     <string name="profile_edit_window">Profile Edit Window</string>
     <string name="profile_remove_window">Profile Remove Window</string>
     <string name="logout_user">Logout</string>
+    <string name="apartment_name_label">Apartment</string>
 </resources>
