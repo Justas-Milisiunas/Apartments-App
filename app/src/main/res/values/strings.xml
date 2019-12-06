@@ -35,4 +35,8 @@
     <string name="profile_remove_window">Profile Remove Window</string>
     <string name="logout_user">Logout</string>
     <string name="apartment_name_label">Apartment</string>
+    <string name="booking_cancel_button_text">Cancel</string>
+    <string name="booking_cancel_title">Booking cancellation</string>
+    <string name="cancel_booking_button">Cancel Booking</string>
+    <string name="apartments_list_name">Apartment</string>
 </resources>

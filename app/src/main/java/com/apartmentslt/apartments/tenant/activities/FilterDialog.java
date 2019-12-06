@@ -33,18 +33,8 @@ public class FilterDialog extends DialogFragment {
 
         dialogView = inflater.inflate(R.layout.apartments_list_filtering_dialog, null);
         builder.setView(dialogView)
-                .setPositiveButton("Filter", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        sendFilterOptions();
-                    }
-                })
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        FilterDialog.this.getDialog().cancel();
-                    }
-                });
+                .setPositiveButton("Filter", (dialog, which) -> sendFilterOptions())
+                .setNegativeButton("Cancel", (dialog, which) -> FilterDialog.this.getDialog().cancel());
 
         return builder.create();
     }

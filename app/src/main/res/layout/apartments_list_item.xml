@@ -20,15 +20,31 @@
         android:background="@color/textBackground"
         android:minHeight="30dp"
         android:padding="@dimen/padding_small"
-        android:text="Apartment"
+        android:text="@string/apartments_list_name"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="#C8FFFFFF" />
+
+    <RatingBar
+        android:id="@+id/rating_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:layout_marginTop="@dimen/margin_small"
+        android:rating="0"
+        android:stepSize="0.25"
+        android:isIndicator="true"
+        android:layout_below="@id/name" />
+
+    <View
+        android:id="@+id/divider11"
+        style="@style/Divider"
+        android:layout_below="@+id/rating_bar" />
 
     <TextView
         android:id="@+id/address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/apartment_image"
+        android:layout_below="@id/divider11"
         android:drawableLeft="@drawable/ic_location"
         android:drawablePadding="@dimen/padding"
         android:padding="@dimen/padding"

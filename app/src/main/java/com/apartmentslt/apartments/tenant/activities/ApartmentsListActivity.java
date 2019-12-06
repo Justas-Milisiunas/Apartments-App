@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -106,6 +107,10 @@ public class ApartmentsListActivity extends AppCompatActivity implements BottomN
 
                 Chip rooms = ((Chip) viewHolder.getComponent(R.id.rooms));
                 rooms.setText(model.getKambaruSkaicius() + " kambariai");
+
+                RatingBar ratingBar = ((RatingBar) viewHolder.getComponent(R.id.rating_bar));
+                ratingBar.setRating(model.calculateRating());
+
 
                 ImageView image = ((ImageView) viewHolder.getComponent(R.id.apartment_image));
                 Glide.with(getApplicationContext())
