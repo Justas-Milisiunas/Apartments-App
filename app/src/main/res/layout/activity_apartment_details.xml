@@ -46,6 +46,7 @@
             android:layout_marginLeft="@dimen/margin_super_small"
             android:layout_marginTop="@dimen/margin_super_small"
             android:text="@string/booking_cancel_button"
+            android:onClick="cancelBooking"
             app:layout_constraintStart_toEndOf="@+id/apartment_book"
             app:layout_constraintTop_toBottomOf="@+id/apartment_image" />
 

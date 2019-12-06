@@ -3,16 +3,20 @@ package com.apartmentslt.apartments.tenant.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.apartmentslt.apartments.Appbar;
 import com.apartmentslt.apartments.BuildConfig;
 import com.apartmentslt.apartments.R;
 import com.apartmentslt.apartments.models.Apartment;
+import com.apartmentslt.apartments.models.CancelBooking;
 import com.apartmentslt.apartments.models.RentPeriod;
 import com.apartmentslt.apartments.models.User;
 import com.apartmentslt.apartments.services.ApartmentsService;
@@ -25,6 +29,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -48,9 +53,25 @@ public class ApartmentDetailsActivity extends AppCompatActivity {
             bindData(this.currentApartment);
         }
 
+        setBookingCancelButtonVisibility();
+
         Appbar toolbar = new Appbar(this, R.id.toolbar, getTitle().toString());
         toolbar.addBackButton();
         toolbar.show();
+    }
+
+    /**
+     * Shows or hides booking cancel button based on if user rented this apartment
+     */
+    private void setBookingCancelButtonVisibility() {
+        Button cancel = findViewById(R.id.booking_cancel);
+        boolean userRents = getAllUsersBookings().size() != 0;
+
+        if (!userRents) {
+            cancel.setVisibility(View.GONE);
+        } else {
+            cancel.setVisibility(View.VISIBLE);
+        }
     }
 
     /**
@@ -93,6 +114,7 @@ public class ApartmentDetailsActivity extends AppCompatActivity {
             // Adds last interval date
             // TODO: fix this
             disabledDays.add(((Calendar) start.clone()));
+            usersRentDays.add(((Calendar) start.clone()));
         }
         datePickerDialog.setDisabledDays(disabledDays.toArray(new Calendar[disabledDays.size()]));
         datePickerDialog.setHighlightedDays(usersRentDays.toArray(new Calendar[usersRentDays.size()]));
@@ -229,6 +251,7 @@ public class ApartmentDetailsActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Booking reservation was created successfully", Toast.LENGTH_SHORT).show();
                         // Add new reservation data
                         currentApartment.getNuomosLaikotarpis().add(reservationData);
+                        setBookingCancelButtonVisibility();
                     }
                 } else {
                     Toast.makeText(getApplicationContext(), response.message(), Toast.LENGTH_LONG).show();
@@ -282,5 +305,90 @@ public class ApartmentDetailsActivity extends AppCompatActivity {
                 .error(R.drawable.ic_error)
                 .into(image);
         // TODO: Finish binding rating
+    }
+
+    /**
+     * Shows booking cancellation dialog
+     *
+     * @param view View
+     */
+    public void cancelBooking(View view) {
+        CancelBookingDialog cancelBookingDialog = new CancelBookingDialog();
+        cancelBookingDialog.show(getSupportFragmentManager(), "CancelButtonDialogFragment");
+    }
+
+    /**
+     * Gets all rent periods for apartment which local user is tenant of
+     *
+     * @return Rent periods list
+     */
+    public List<RentPeriod> getAllUsersBookings() {
+        List<RentPeriod> filtered = new ArrayList<>();
+
+        for (RentPeriod period : currentApartment.getNuomosLaikotarpis()) {
+            if (period.getFkNuomininkasidIsNaudotojas() == User.getInstance().getIdIsNaudotojas())
+                filtered.add(period);
+        }
+
+        return filtered;
+    }
+
+    /**
+     * Shows confirmation dialog
+     */
+    public void cancelBookingConfirmation(RentPeriod selected) {
+        new AlertDialog.Builder(this)
+                .setTitle("Cancel Confirmation")
+                .setMessage("Do you really want to cancel this booking?")
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setPositiveButton(android.R.string.yes, (dialog, which) -> cancelBookingRequest(selected))
+                .setNegativeButton(android.R.string.no, null).show();
+    }
+
+    /**
+     * Makes API request for removing booking
+     */
+    private void cancelBookingRequest(RentPeriod selected) {
+        CancelBooking cancelBooking = new CancelBooking(selected.getIdNuomosLaikotarpis(), User.getInstance().getIdIsNaudotojas());
+
+        Gson gson = new GsonBuilder()
+                .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+                .create();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BuildConfig.API_URL)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+
+        ApartmentsService apartmentsService = retrofit.create(ApartmentsService.class);
+        final Call<ResponseBody> request = apartmentsService.cancelBooking(cancelBooking);
+
+        request.enqueue(new Callback<ResponseBody>() {
+            /**
+             * If booking cancel request was successful shows toast message
+             * @param call Call
+             * @param response Response
+             */
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(getApplicationContext(), "Booking was successfully cancelled", Toast.LENGTH_SHORT).show();
+                    currentApartment.getNuomosLaikotarpis().remove(selected);
+                    setBookingCancelButtonVisibility();
+                } else {
+                    Toast.makeText(getApplicationContext(), response.message(), Toast.LENGTH_LONG).show();
+                }
+            }
+
+            /**
+             * If request to apartments API was unsuccessful shows error message
+             * @param call Call
+             * @param t exception
+             */
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
