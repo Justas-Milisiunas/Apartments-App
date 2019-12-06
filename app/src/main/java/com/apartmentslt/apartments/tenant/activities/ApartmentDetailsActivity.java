@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Spinner;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +17,7 @@ import com.apartmentslt.apartments.BuildConfig;
 import com.apartmentslt.apartments.R;
 import com.apartmentslt.apartments.models.Apartment;
 import com.apartmentslt.apartments.models.CancelBooking;
+import com.apartmentslt.apartments.models.Rating;
 import com.apartmentslt.apartments.models.RentPeriod;
 import com.apartmentslt.apartments.models.User;
 import com.apartmentslt.apartments.services.ApartmentsService;
@@ -53,11 +54,91 @@ public class ApartmentDetailsActivity extends AppCompatActivity {
             bindData(this.currentApartment);
         }
 
+        setRating();
         setBookingCancelButtonVisibility();
+        setRatingBarListener();
 
         Appbar toolbar = new Appbar(this, R.id.toolbar, getTitle().toString());
         toolbar.addBackButton();
         toolbar.show();
+    }
+
+    /**
+     * Sets current user's rating
+     */
+    private void setRating() {
+        RatingBar ratingBar = findViewById(R.id.ratingBar);
+
+        for (Rating reitingas : currentApartment.getReitingas()) {
+            if (reitingas.getFkNuomininkasidIsNaudotojas() == User.getInstance().getIdIsNaudotojas()) {
+                ratingBar.setRating(reitingas.getIvertinimas());
+                return;
+            }
+        }
+    }
+
+    /**
+     * Starts listener for rating bar events
+     */
+    private void setRatingBarListener() {
+        RatingBar ratingBar = findViewById(R.id.ratingBar);
+        ratingBar.setOnRatingBarChangeListener((ratingBar1, rating, fromUser) -> {
+            Rating newRating = new Rating(((int) Math.ceil(rating)), currentApartment.getIdButas(), User.getInstance().getIdIsNaudotojas());
+
+            Gson gson = new GsonBuilder()
+                    .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+                    .create();
+
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(BuildConfig.API_URL)
+                    .addConverterFactory(GsonConverterFactory.create(gson))
+                    .build();
+
+            ApartmentsService apartmentsService = retrofit.create(ApartmentsService.class);
+            final Call<Rating> request = apartmentsService.rateApartment(newRating);
+
+            request.enqueue(new Callback<Rating>() {
+                /**
+                 * Shows updated rating
+                 * @param call Call
+                 * @param response Request response
+                 */
+                @Override
+                public void onResponse(Call<Rating> call, Response<Rating> response) {
+                    if (response.isSuccessful()) {
+                        Rating savedRating = response.body();
+
+                        if (savedRating == null) {
+                            Toast.makeText(getApplicationContext(), "Could not save your rating", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Your rating was successfully saved", Toast.LENGTH_SHORT).show();
+
+                            for (Rating reitingas : currentApartment.getReitingas()) {
+                                if (reitingas.getFkButasidButas() == savedRating.getFkButasidButas() &&
+                                        reitingas.getFkNuomininkasidIsNaudotojas() == User.getInstance().getIdIsNaudotojas()) {
+                                    reitingas.setIvertinimas(savedRating.getIvertinimas());
+                                    break;
+                                }
+                            }
+
+                            setRating();
+                        }
+                    } else {
+                        Toast.makeText(getApplicationContext(), response.message(), Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                /**
+                 * If request to apartments API was unsuccessful shows error message
+                 * @param call Call
+                 * @param t exception
+                 */
+                @Override
+                public void onFailure(Call<Rating> call, Throwable t) {
+                    Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        });
     }
 
     /**

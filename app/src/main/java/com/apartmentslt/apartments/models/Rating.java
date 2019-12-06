@@ -2,7 +2,7 @@ package com.apartmentslt.apartments.models;
 
 import java.io.Serializable;
 
-class Rating implements Serializable {
+public class Rating implements Serializable {
     private int ivertinimas;
     private int fkButasidButas;
     private int fkNuomininkasidIsNaudotojas;
