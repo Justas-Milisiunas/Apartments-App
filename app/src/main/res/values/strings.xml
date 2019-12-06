@@ -38,4 +38,5 @@
     <string name="booking_cancel_button_text">Cancel</string>
     <string name="booking_cancel_title">Booking cancellation</string>
     <string name="cancel_booking_button">Cancel Booking</string>
+    <string name="apartments_list_name">Apartment</string>
 </resources>

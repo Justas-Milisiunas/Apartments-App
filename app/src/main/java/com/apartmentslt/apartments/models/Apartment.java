@@ -56,6 +56,20 @@ public class Apartment implements Serializable {
         this.skundas = skundas;
     }
 
+    /**
+     * Calculates ratings average
+     *
+     * @return Ratings average
+     */
+    public float calculateRating() {
+        float ratingSum = 0f;
+        for (Rating rating : reitingas) {
+            ratingSum += rating.getIvertinimas();
+        }
+
+        return ratingSum / reitingas.size();
+    }
+
     public void setDydis(int dydis) {
         this.dydis = dydis;
     }
