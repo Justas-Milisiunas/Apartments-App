@@ -39,4 +39,9 @@
     <string name="profile_label">Profile</string>
     <string name="last_name_label">Last Name:</string>
     <string name="email_label">Email:</string>
+    <string name="apartment_name_label">Apartment</string>
+    <string name="booking_cancel_button_text">Cancel</string>
+    <string name="booking_cancel_title">Booking cancellation</string>
+    <string name="cancel_booking_button">Cancel Booking</string>
+    <string name="apartments_list_name">Apartment</string>
 </resources>

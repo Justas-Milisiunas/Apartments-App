@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="250dp"
             android:contentDescription="@string/apartment_image_description"
-            android:scaleType="centerCrop"
+            android:scaleType="fitCenter"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/include2"
@@ -46,6 +46,7 @@
             android:layout_marginLeft="@dimen/margin_super_small"
             android:layout_marginTop="@dimen/margin_super_small"
             android:text="@string/booking_cancel_button"
+            android:onClick="cancelBooking"
             app:layout_constraintStart_toEndOf="@+id/apartment_book"
             app:layout_constraintTop_toBottomOf="@+id/apartment_image" />
 
@@ -125,8 +126,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:numStars="5"
-            android:rating="4.5"
-            android:stepSize="0.25"
+            android:rating="0"
+            android:stepSize="1"
             app:layout_constraintBottom_toBottomOf="@+id/apartment_image"
             app:layout_constraintStart_toStartOf="@+id/apartment_image" />
 

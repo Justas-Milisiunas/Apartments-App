@@ -23,7 +23,8 @@ public abstract class GenericAdapter<T> extends RecyclerView.Adapter<RecyclerVie
 
     /**
      * Inflates item layout before adding to recycler view
-     * @param parent Parent view group
+     *
+     * @param parent   Parent view group
      * @param viewType ViewType
      * @return Item view holder object
      */
@@ -36,7 +37,8 @@ public abstract class GenericAdapter<T> extends RecyclerView.Adapter<RecyclerVie
 
     /**
      * Binds item's data to inflated layout components and creates click listener
-     * @param holder Inflated recycler view item layout
+     *
+     * @param holder   Inflated recycler view item layout
      * @param position Itm position
      */
     @Override
@@ -53,6 +55,7 @@ public abstract class GenericAdapter<T> extends RecyclerView.Adapter<RecyclerVie
 
     /**
      * Gets items list size
+     *
      * @return Items list size
      */
     @Override
@@ -62,6 +65,7 @@ public abstract class GenericAdapter<T> extends RecyclerView.Adapter<RecyclerVie
 
     /**
      * Adds item at the back and notifies adapter to refresh recycler view list
+     *
      * @param item New item
      */
     public void addItem(T item) {
@@ -71,6 +75,7 @@ public abstract class GenericAdapter<T> extends RecyclerView.Adapter<RecyclerVie
 
     /**
      * Adds items array at the back
+     *
      * @param items Items array
      */
     public void addAll(T[] items) {
@@ -83,24 +88,35 @@ public abstract class GenericAdapter<T> extends RecyclerView.Adapter<RecyclerVie
 
     /**
      * Gets recycler view item layout id
+     *
      * @return Item layout id
      */
     public abstract int getLayoutId();
 
     /**
      * Expects data binding implementation
-     * @param model Current item
-     * @param position Current item's position
+     *
+     * @param model      Current item
+     * @param position   Current item's position
      * @param viewHolder Inflated layout view
      */
     public abstract void onBindData(T model, int position, ItemViewHolder viewHolder);
 
     /**
      * Expects item on click behaviour implementation
-     * @param item Clicked item
+     *
+     * @param item     Clicked item
      * @param position Clicked item position in list
      */
     public abstract void onClick(T item, int position);
+
+    /**
+     * Clears all items from data array
+     */
+    public void clear() {
+        dataList.clear();
+        this.notifyDataSetChanged();
+    }
 
     /**
      * Class for holding inflated layout
@@ -115,6 +131,7 @@ public abstract class GenericAdapter<T> extends RecyclerView.Adapter<RecyclerVie
 
         /**
          * Returns inflated layout components (TextView, EditText, etc.)
+         *
          * @param id Component id
          * @return Found component
          */

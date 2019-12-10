@@ -74,7 +74,7 @@ public class ReadComplaintsActivity extends AppCompatActivity implements BottomN
             @Override
             public void onBindData(Complaint model, int position, ItemViewHolder viewHolder) {
                 TextView address = ((TextView) viewHolder.getComponent(R.id.address));
-                address.setText(model.getAddress());
+                address.setText(model.getPranesimas());
             }
 
             @Override
@@ -98,14 +98,14 @@ public class ReadComplaintsActivity extends AppCompatActivity implements BottomN
      * TODO: Load data from backend API
      */
     private void loadData() {
-        Complaint demo = new Complaint(
-                "Jonas", "Studentu g 60, Kaunas", "Neveikia vandentiekis");
-        this.mAdapter.addItem(demo);
-        this.mAdapter.addItem(demo);
-        this.mAdapter.addItem(demo);
-        this.mAdapter.addItem(demo);
-        this.mAdapter.addItem(demo);
-        this.mAdapter.addItem(demo);
+//        Complaint demo = new Complaint(
+//                "Jonas", "Studentu g 60, Kaunas", "Neveikia vandentiekis");
+//        this.mAdapter.addItem(demo);
+//        this.mAdapter.addItem(demo);
+//        this.mAdapter.addItem(demo);
+//        this.mAdapter.addItem(demo);
+//        this.mAdapter.addItem(demo);
+//        this.mAdapter.addItem(demo);
     }
 
     /**

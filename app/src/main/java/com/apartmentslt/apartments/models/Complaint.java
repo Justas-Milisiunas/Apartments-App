@@ -1,37 +1,39 @@
 package com.apartmentslt.apartments.models;
 
-public class Complaint {
-    private String name;
-    private String address;
-    private String complaint;
+import java.io.Serializable;
 
-    public Complaint(String name, String address, String complaint) {
-        this.name = name;
-        this.address = address;
-        this.complaint = complaint;
+public class Complaint implements Serializable {
+    private String pranesimas;
+    private int FkButasidButas;
+    private int FkNuomininkasidIsNaudotojas;
+
+    public Complaint(String pranesimas, int fkButasidButas, int fkNuomininkasidIsNaudotojas) {
+        this.pranesimas = pranesimas;
+        FkButasidButas = fkButasidButas;
+        FkNuomininkasidIsNaudotojas = fkNuomininkasidIsNaudotojas;
     }
 
-    public String getName() {
-        return name;
+    public void setPranesimas(String pranesimas) {
+        this.pranesimas = pranesimas;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFkButasidButas(int fkButasidButas) {
+        FkButasidButas = fkButasidButas;
     }
 
-    public String getAddress() {
-        return address;
+    public void setFkNuomininkasidIsNaudotojas(int fkNuomininkasidIsNaudotojas) {
+        FkNuomininkasidIsNaudotojas = fkNuomininkasidIsNaudotojas;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public String getPranesimas() {
+        return pranesimas;
     }
 
-    public String getComplaint() {
-        return complaint;
+    public int getFkButasidButas() {
+        return FkButasidButas;
     }
 
-    public void setComplaint(String complaint) {
-        this.complaint = complaint;
+    public int getFkNuomininkasidIsNaudotojas() {
+        return FkNuomininkasidIsNaudotojas;
     }
 }

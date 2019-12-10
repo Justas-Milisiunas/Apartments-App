@@ -20,12 +20,36 @@
         android:layout_marginLeft="@dimen/margin_big"
         android:layout_marginEnd="@dimen/margin_big"
         android:layout_marginRight="@dimen/margin_big"
-        android:layout_marginBottom="@dimen/margin"
+        android:layout_marginBottom="@dimen/margin_big"
         android:text="@string/complaint_label"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-        app:layout_constraintBottom_toTopOf="@id/complaint_text"
+        app:layout_constraintBottom_toTopOf="@id/apartment_name_label"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/apartment_name_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_big"
+        android:layout_marginLeft="@dimen/margin_big"
+        android:layout_marginBottom="@dimen/margin"
+        android:text="@string/apartment_name_label"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintBottom_toTopOf="@id/complaint_text"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <Spinner
+        android:id="@+id/apartments_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:spinnerMode="dropdown"
+        android:layout_marginBottom="@dimen/margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/apartment_name_label"
+        app:layout_constraintBottom_toTopOf="@id/complaint_text"
+        tools:layout_editor_absoluteY="90dp" />
 
     <EditText
         android:id="@+id/complaint_text"
@@ -54,6 +78,7 @@
         android:layout_marginEnd="@dimen/margin_big"
         android:layout_marginRight="@dimen/margin_big"
         android:text="@string/send_complaint_button"
+        android:onClick="sendComplaint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/complaint_text" />
