@@ -34,5 +34,9 @@
     <string name="profile_edit_window">Profile Edit Window</string>
     <string name="profile_remove_window">Profile Remove Window</string>
     <string name="logout_user">Logout</string>
-    <string name="user_name">Name</string>
+    <string name="user_name">Name:</string>
+    <string name="profile_settings_label">Profile settings</string>
+    <string name="profile_label">Profile</string>
+    <string name="last_name_label">Last Name:</string>
+    <string name="email_label">Email:</string>
 </resources>
