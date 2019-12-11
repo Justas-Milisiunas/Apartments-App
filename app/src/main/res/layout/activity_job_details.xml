@@ -13,13 +13,124 @@
         android:layout_height="wrap_content" />
 
     <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
+        android:id="@+id/jobName"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/job_details_window"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:drawablePadding="@dimen/padding"
+        android:padding="@dimen/padding"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:text="Pavadinimas"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/include" />
+
+    <View
+        android:id="@+id/topBarNameDivider"
+        style="@style/Divider"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/jobName" />
+
+    <TextView
+        android:id="@+id/jobCreationDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sukurimo data"
+        android:drawablePadding="@dimen/padding"
+        android:padding="@dimen/padding"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topBarNameDivider" />
+
+    <View
+        android:id="@+id/nameDateDivider"
+        style="@style/Divider"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/jobCreationDate" />
+
+    <TextView
+        android:id="@+id/jobAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_location"
+        android:text="Adresas"
+        android:drawablePadding="@dimen/padding"
+        android:padding="@dimen/padding"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameDateDivider" />
+
+    <View
+        android:id="@+id/dateAddressDivider"
+        style="@style/Divider"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/jobAddress" />
+
+    <TextView
+        android:id="@+id/jobPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableRight="@drawable/ic_money"
+        android:text="Uzmokestis"
+        android:drawablePadding="@dimen/padding"
+        android:padding="@dimen/padding"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dateAddressDivider" />
+
+    <View
+        android:id="@+id/addressPriceDivider"
+        style="@style/Divider"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/jobPrice" />
+
+    <TextView
+        android:id="@+id/apartmentSize"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Buto dydis"
+        android:drawablePadding="@dimen/padding"
+        android:padding="@dimen/padding"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addressPriceDivider" />
+
+    <View
+        android:id="@+id/sizeButtonsDivider"
+        style="@style/Divider"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/apartmentSize" />
+
+    <Button
+        android:id="@+id/takeJobButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_super_small"
+        android:text="Take Job"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sizeButtonsDivider" />
+
+    <Button
+        android:id="@+id/jobDoneButton"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin"
+        android:layout_marginLeft="@dimen/margin_super_small"
+        android:layout_marginTop="@dimen/margin_super_small"
+        android:text="Job Done"
+        app:layout_constraintStart_toEndOf="@+id/takeJobButton"
+        app:layout_constraintTop_toBottomOf="@+id/sizeButtonsDivider" />
+
+    <Button
+        android:id="@+id/jobCancelButton"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin"
+        android:layout_marginLeft="@dimen/margin_super_small"
+        android:layout_marginTop="@dimen/margin_super_small"
+        android:text="Cancel Job"
+        app:layout_constraintStart_toEndOf="@+id/jobDoneButton"
+        app:layout_constraintTop_toBottomOf="@+id/sizeButtonsDivider" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

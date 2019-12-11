@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/navigation_jobs_list"
+        android:icon="@drawable/ic_view_list"
+        android:title="@string/jobs_list"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/navigation_history_list"
+        android:icon="@drawable/ic_view_list"
+        android:title="@string/jobs_history"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/navigation_jobs_report"
+        android:icon="@drawable/ic_report"
+        android:title="@string/jobs_report"
+        app:showAsAction="ifRoom" />
+
+</menu>

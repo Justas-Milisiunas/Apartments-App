@@ -21,6 +21,7 @@
             android:label="Report" />
         <activity
             android:name=".worker.JobDetailsActivity"
+            android:parentActivityName=".worker.JobsListActivity"
             android:label="Job Details" />
         <activity
             android:name=".worker.JobsHistoryActivity"

@@ -39,4 +39,7 @@
     <string name="booking_cancel_title">Booking cancellation</string>
     <string name="cancel_booking_button">Cancel Booking</string>
     <string name="apartments_list_name">Apartment</string>
+    <string name="jobs_list">Jobs List</string>
+    <string name="jobs_history">Jobs History</string>
+    <string name="jobs_report">Jobs Report</string>
 </resources>
