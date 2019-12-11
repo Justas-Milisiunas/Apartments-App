@@ -2,10 +2,12 @@ package com.apartmentslt.apartments.profile.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.apartmentslt.apartments.Appbar;
@@ -24,6 +26,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class ProfileActivity extends AppCompatActivity {
+    User userData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,41 @@ public class ProfileActivity extends AppCompatActivity {
 
         Appbar toolbar = new Appbar(this, R.id.toolbar, getTitle().toString());
         toolbar.show();
+
+        userData = User.getInstance();
+        bindData();
+    }
+
+    /**
+     * Binds users data to layout components
+     */
+    @SuppressLint("SetTextI18n")
+    private void bindData() {
+        TextView name = findViewById(R.id.user_name);
+        TextView lastName = findViewById(R.id.user_last_name);
+        TextView email = findViewById(R.id.user_email);
+        TextView balance = findViewById(R.id.user_balance);
+        TextView role = findViewById(R.id.user_role);
+
+        name.setText("Name: " + userData.getVardas());
+        lastName.setText("Last Name: " + userData.getPavarde());
+        email.setText("Email: " + userData.getElPastas());
+        balance.setText("Balance " + userData.getBalansas() + "€");
+
+        String roleText = "Role: ";
+        switch (userData.getRole()) {
+            case 0:
+                roleText += "Owner";
+                break;
+            case 1:
+                roleText += "Tenant";
+                break;
+            case 2:
+                roleText += "Worker";
+                break;
+        }
+
+        role.setText(roleText);
     }
 
     public void goEditProfile(View view) {
@@ -94,5 +132,12 @@ public class ProfileActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        userData = User.getInstance();
+        bindData();
+        super.onResume();
     }
 }

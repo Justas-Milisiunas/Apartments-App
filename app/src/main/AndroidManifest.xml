@@ -15,6 +15,7 @@
         tools:ignore="GoogleAppIndexingWarning,UnusedAttribute">
         <activity
             android:name=".profile.activities.ProfileEditActivity"
+            android:parentActivityName=".profile.activities.ProfileActivity"
             android:label="Edit Profile" />
         <activity
             android:name=".worker.ReportActivity"
