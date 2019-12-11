@@ -2,6 +2,7 @@ package com.apartmentslt.apartments.worker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.job.JobService;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,10 +12,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.apartmentslt.apartments.Appbar;
+import com.apartmentslt.apartments.BuildConfig;
 import com.apartmentslt.apartments.R;
+import com.apartmentslt.apartments.models.JobUpdateDto;
 import com.apartmentslt.apartments.models.User;
 import com.apartmentslt.apartments.models.Work;
+import com.apartmentslt.apartments.services.JobsService;
+import com.apartmentslt.apartments.services.UserService;
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class JobDetailsActivity extends AppCompatActivity {
     private static final String TAG = JobDetailsActivity.class.getName();
@@ -31,7 +45,6 @@ public class JobDetailsActivity extends AppCompatActivity {
         if (this.currentWork != null){
             bindData(this.currentWork);
         }
-
 
         setCancelJobButtonVisibility();
         setTakeJobButtonVisibility();
@@ -64,7 +77,7 @@ public class JobDetailsActivity extends AppCompatActivity {
         int jobStatus = getJobStatus();
         boolean isUserIn = checkIfUserIsSign();
 
-        if (jobStatus == 2 && isUserIn) {
+        if (isUserIn && jobStatus == 2) {
             take.setVisibility(View.VISIBLE);
         } else {
             take.setVisibility(View.GONE);
@@ -79,7 +92,7 @@ public class JobDetailsActivity extends AppCompatActivity {
         int jobStatus = getJobStatus();
         boolean isUserIn = checkIfUserIsSign();
 
-        if (jobStatus == 1 && isUserIn) {
+        if (jobStatus == 2 && isUserIn) {
             take.setVisibility(View.VISIBLE);
         } else {
             take.setVisibility(View.GONE);
@@ -95,25 +108,19 @@ public class JobDetailsActivity extends AppCompatActivity {
     }
 
     /**
-     * Binds apartments data to components
+     * Binds job data to components
      *
      * @param job Job
      */
     private void bindData(Work job) {
         String[] splitedDate = String.valueOf(job.getSukurimoData()).split(" ");
-        String date = splitedDate[0] + " " + splitedDate[1] + " " + splitedDate[2];
+        String date = splitedDate[0] + " " + splitedDate[1] + " " + splitedDate[2] + " " + splitedDate[5];
 
         ((TextView) findViewById(R.id.jobName)).setText(job.getButas().getPavadinimas());
-        ((TextView) findViewById(R.id.jobCreationDate)).setText("Creation date: " + date);
+        ((TextView) findViewById(R.id.jobCreationDate)).setText("Created: " + date);
         ((TextView) findViewById(R.id.jobAddress)).setText(job.getButas().getMiestas() + " " + job.getButas().getAdresas());
         ((TextView) findViewById(R.id.jobPrice)).setText(String.valueOf(job.getUzmokestis()));
         ((TextView) findViewById(R.id.apartmentSize)).setText(String.valueOf(job.getButas().getDydis()));
-
-//        ImageView image = findViewById(R.id.apartment_image);
-//        Glide.with(getApplicationContext())
-//                .load(apartment.getNuotraukaUrl())
-//                .error(R.drawable.ic_error)
-//                .into(image);
     }
 
     /**
@@ -131,5 +138,128 @@ public class JobDetailsActivity extends AppCompatActivity {
             }
         }
         return job;
+    }
+
+    public void setJobTaken(View view) {
+        JobUpdateDto updateJob = new JobUpdateDto(User.getInstance().getIdIsNaudotojas(),
+                currentWork.getIdDarbas());
+        Gson gson = new GsonBuilder()
+                .setDateFormat("yyyy-MM-dd")
+                .create();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BuildConfig.API_URL)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+
+        JobsService jobService = retrofit.create(JobsService.class);
+        final Call<Work>requestCall = jobService.makeJobAsTaken(updateJob);
+        requestCall.enqueue(new Callback<Work>() {
+            /**
+             * If request successful logouts user
+             * @param call Call
+             * @param response Request response
+             */
+            @Override
+            public void onResponse(Call<Work> call, Response<Work> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(getApplicationContext(), "Job is Yours!", Toast.LENGTH_SHORT).show();
+                    finish();
+                } else {
+                    Toast.makeText(getApplicationContext(), response.message(), Toast.LENGTH_LONG).show();
+                }
+            }
+            /**
+             * If error shows toast message
+             * @param call
+             * @param t
+             */
+            @Override
+            public void onFailure(Call<Work> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void setJobDone(View view) {
+        JobUpdateDto updateJob = new JobUpdateDto(User.getInstance().getIdIsNaudotojas(),
+                currentWork.getIdDarbas());
+        Gson gson = new GsonBuilder()
+                .setDateFormat("yyyy-MM-dd")
+                .create();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BuildConfig.API_URL)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+
+        JobsService jobService = retrofit.create(JobsService.class);
+        final Call<Work>requestCall = jobService.makeJobAsDone(updateJob);
+        requestCall.enqueue(new Callback<Work>() {
+            /**
+             * If request successful logouts user
+             * @param call Call
+             * @param response Request response
+             */
+            @Override
+            public void onResponse(Call<Work> call, Response<Work> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(getApplicationContext(), "Job is Done!", Toast.LENGTH_SHORT).show();
+                    finish();
+                } else {
+                    Toast.makeText(getApplicationContext(), response.message(), Toast.LENGTH_LONG).show();
+                }
+            }
+            /**
+             * If error shows toast message
+             * @param call
+             * @param t
+             */
+            @Override
+            public void onFailure(Call<Work> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void setJobCancel(View view) {
+        JobUpdateDto updateJob = new JobUpdateDto(User.getInstance().getIdIsNaudotojas(),
+                currentWork.getIdDarbas());
+        Gson gson = new GsonBuilder()
+                .setDateFormat("yyyy-MM-dd")
+                .create();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BuildConfig.API_URL)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+
+        JobsService jobService = retrofit.create(JobsService.class);
+        final Call<Work>requestCall = jobService.cancelJob(updateJob);
+        requestCall.enqueue(new Callback<Work>() {
+            /**
+             * If request successful logouts user
+             * @param call Call
+             * @param response Request response
+             */
+            @Override
+            public void onResponse(Call<Work> call, Response<Work> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(getApplicationContext(), "Job Canceled!", Toast.LENGTH_SHORT).show();
+                    finish();
+                } else {
+                    Toast.makeText(getApplicationContext(), response.message(), Toast.LENGTH_LONG).show();
+                }
+            }
+            /**
+             * If error shows toast message
+             * @param call
+             * @param t
+             */
+            @Override
+            public void onFailure(Call<Work> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

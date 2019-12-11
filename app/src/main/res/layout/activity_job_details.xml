@@ -105,6 +105,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_super_small"
+        android:onClick="setJobTaken"
         android:text="Take Job"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sizeButtonsDivider" />
@@ -118,6 +119,7 @@
         android:layout_marginLeft="@dimen/margin_super_small"
         android:layout_marginTop="@dimen/margin_super_small"
         android:text="Job Done"
+        android:onClick="setJobDone"
         app:layout_constraintStart_toEndOf="@+id/takeJobButton"
         app:layout_constraintTop_toBottomOf="@+id/sizeButtonsDivider" />
 
@@ -130,6 +132,7 @@
         android:layout_marginLeft="@dimen/margin_super_small"
         android:layout_marginTop="@dimen/margin_super_small"
         android:text="Cancel Job"
+        android:onClick="setJobCancel"
         app:layout_constraintStart_toEndOf="@+id/jobDoneButton"
         app:layout_constraintTop_toBottomOf="@+id/sizeButtonsDivider" />
 

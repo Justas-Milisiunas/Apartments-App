@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.apartmentslt.apartments.Appbar;
 import com.apartmentslt.apartments.BuildConfig;
 import com.apartmentslt.apartments.GenericAdapter;
+import com.apartmentslt.apartments.models.User;
 import com.apartmentslt.apartments.models.Work;
 import com.apartmentslt.apartments.profile.activities.ProfileActivity;
 import com.apartmentslt.apartments.R;
@@ -190,7 +191,9 @@ public class JobsListActivity extends AppCompatActivity implements BottomNavigat
             Toast.makeText(this, jobs.size() + " jobs found", Toast.LENGTH_SHORT).show();
 
         for (Work job : jobs) {
-            mAdapter.addItem(job);
+            if(job.getBusena() == 3 || (job.getBusena() == 2 && User.getInstance().getIdIsNaudotojas() == job.getFkValytojasidIsNaudotojas()))
+//            if (job.getBusena() != 3 || (User.getInstance().getIdIsNaudotojas() != job.getFkValytojasidIsNaudotojas() ))
+                mAdapter.addItem(job);
         }
     }
 

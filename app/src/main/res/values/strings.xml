@@ -29,7 +29,7 @@
     <string name="delete_profile">Delete Profile</string>
     <string name="job_details_window">Job Details Window</string>
     <string name="jobs_history_window">Jobs History Window</string>
-    <string name="report_window">Report Window</string>
+    <string name="report_window">If you want to generate your report press the button below</string>
     <string name="generate_report">Generate Report</string>
     <string name="profile_edit_window">Profile Edit Window</string>
     <string name="profile_remove_window">Profile Remove Window</string>

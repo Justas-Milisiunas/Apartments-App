@@ -1,8 +1,10 @@
 package com.apartmentslt.apartments.services;
 
 import com.apartmentslt.apartments.models.JobUpdateDto;
+import com.apartmentslt.apartments.models.ReportGenerateDto;
 import com.apartmentslt.apartments.models.Work;
 
+import java.io.File;
 import java.util.List;
 
 import retrofit2.Call;
@@ -28,6 +30,6 @@ public interface JobsService {
     @PUT("api/jobs/done")
     Call<Work> makeJobAsDone(@Body JobUpdateDto jobUpdate);
 
-    @PUT("api/jobs/cancel")
+    @PUT("api/jobs/delete")
     Call<Work> cancelJob(@Body JobUpdateDto jobUpdate);
 }
