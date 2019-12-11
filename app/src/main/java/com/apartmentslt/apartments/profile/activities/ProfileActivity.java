@@ -133,4 +133,11 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    protected void onResume() {
+        userData = User.getInstance();
+        bindData();
+        super.onResume();
+    }
 }
