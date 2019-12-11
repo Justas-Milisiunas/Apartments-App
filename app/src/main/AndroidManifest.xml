@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.apartmentslt.apartments">
+
+    <application
+        android:allowBackup="true"
+        android:fullBackupContent="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
+        tools:ignore="GoogleAppIndexingWarning,UnusedAttribute">
+        <activity
+            android:name=".profile.activities.ProfileEditActivity"
+            android:parentActivityName=".profile.activities.ProfileActivity"
+            android:label="Edit Profile" />
+        <activity
+            android:name=".worker.ReportActivity"
+            android:label="Report" />
+        <activity
+            android:name=".worker.JobDetailsActivity"
+            android:label="Job Details" />
+        <activity
+            android:name=".worker.JobsHistoryActivity"
+            android:label="Jobs History" />
+        <activity
+            android:name=".profile.activities.ProfileActivity"
+            android:label="Profile" />
+        <activity
+            android:name=".worker.JobsListActivity"
+            android:label="Jobs" />
+        <activity
+            android:name=".tenant.activities.WriteComplaintActivity"
+            android:label="Complaint"
+            android:parentActivityName=".tenant.activities.ApartmentsListActivity"
+            tools:targetApi="jelly_bean" />
+        <activity
+            android:name=".tenant.activities.ApartmentDetailsActivity"
+            android:label="Apartment"
+            android:parentActivityName=".tenant.activities.ApartmentsListActivity"
+            tools:targetApi="jelly_bean" />
+        <activity android:name=".tenant.activities.ApartmentsListActivity" />
+        <activity
+            android:name=".RegisterActivity"
+            android:label="Registration"
+            android:parentActivityName=".LoginActivity"
+            tools:targetApi="jelly_bean" />
+        <activity
+            android:name=".LoginActivity"
+            android:label="Login">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <!-- owner  block -->
+        <activity android:name=".owner.activities.ApartmentsListWithAddButtonActivity" />
+        <activity
+            android:name=".owner.activities.ApartmentDetailsWithEditButtonActivity"
+            android:label="Apartment"
+            android:parentActivityName=".owner.activities.ApartmentsListWithAddButtonActivity"
+            tools:targetApi="jelly_bean" />
+        <activity
+            android:name=".owner.activities.GenerateSummaryActivity"
+            android:label="Summary"
+            android:parentActivityName=".owner.activities.ApartmentsListWithAddButtonActivity"
+            tools:targetApi="jelly_bean" />
+        <activity
+            android:name=".owner.activities.AddApartmentActivity"
+            android:label="Apartment"
+            android:parentActivityName=".owner.activities.ApartmentsListWithAddButtonActivity"
+            tools:targetApi="jelly_bean" />
+        <activity
+            android:name=".owner.activities.ReadComplaintsActivity"
+            android:label="Complaints"
+            android:parentActivityName=".owner.activities.ApartmentsListWithAddButtonActivity"
+            tools:targetApi="jelly_bean" />
+    </application>
+
+    <uses-permission
+        android:name="android.permission.INTERNET"
+        tools:ignore="ManifestOrder" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+
+</manifest>
