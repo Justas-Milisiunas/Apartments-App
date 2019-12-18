@@ -4,29 +4,36 @@ import java.util.Date;
 
 public class ReportGenerateDto {
 
-    private Date From;
-    private Date To;
+    private String From;
+    private String To;
     private int UserID;
+    private boolean email;
 
-    public ReportGenerateDto(Date from, Date to, int userID) {
+    public ReportGenerateDto(String from, String to, int userID) {
         From = from;
         To = to;
         UserID = userID;
     }
+    public ReportGenerateDto(String from, String to, int userID, boolean email) {
+        From = from;
+        To = to;
+        UserID = userID;
+        this.email = email;
+    }
 
-    public Date getFrom() {
+    public String getFrom() {
         return From;
     }
 
-    public void setFrom(Date from) {
+    public void setFrom(String from) {
         From = from;
     }
 
-    public Date getTo() {
+    public String getTo() {
         return To;
     }
 
-    public void setTo(Date to) {
+    public void setTo(String to) {
         To = to;
     }
 

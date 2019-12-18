@@ -2,6 +2,12 @@ package com.apartmentslt.apartments.owner.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -17,14 +23,24 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.apartmentslt.apartments.Appbar;
+import com.apartmentslt.apartments.BuildConfig;
 import com.apartmentslt.apartments.R;
+import com.apartmentslt.apartments.models.Complaint;
+import com.apartmentslt.apartments.models.ReportGenerateDto;
+import com.apartmentslt.apartments.models.SearchOptions;
+import com.apartmentslt.apartments.models.User;
 import com.apartmentslt.apartments.profile.activities.ProfileActivity;
+import com.apartmentslt.apartments.services.ApartmentsService;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class GenerateSummaryActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     CalendarView calendar;
@@ -35,6 +51,7 @@ public class GenerateSummaryActivity extends AppCompatActivity implements Bottom
     TextView toText;
     CheckBox checkBox;
     int years, months, days;
+    String from, to;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +83,8 @@ public class GenerateSummaryActivity extends AppCompatActivity implements Bottom
             public void onClick(View v) {
                 long mills = calendar.getDate();
                 //fromText.setText(getDate(mills, "yyyy-MM-dd"));
-                fromText.setText(years+"-"+months+"-"+days);
+                from = years+"-"+months+"-"+days;
+                fromText.setText(from);
             }
         });
         toButton.setOnClickListener(new View.OnClickListener() {
@@ -74,7 +92,8 @@ public class GenerateSummaryActivity extends AppCompatActivity implements Bottom
             public void onClick(View v) {
                 long mills = calendar.getDate();
                 //toText.setText(getDate(mills, "yyyy-MM-dd"));
-                toText.setText(years+"-"+months+"-"+days);
+                to = years+"-"+months+"-"+days;
+                toText.setText(to);
 
             }
         });
@@ -82,12 +101,60 @@ public class GenerateSummaryActivity extends AppCompatActivity implements Bottom
         generateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (checkBox.isChecked()) {
-                    Toast.makeText(getApplicationContext(), "Forwarded to email service", Toast.LENGTH_SHORT).show();
+                if (from != null && to != null) {
+                    if (checkBox.isChecked()) {
+                        Gson gson = new GsonBuilder()
+                                .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+                                .create();
+
+                        Retrofit retrofit = new Retrofit.Builder()
+                                .baseUrl(BuildConfig.API_URL)
+                                .addConverterFactory(GsonConverterFactory.create(gson))
+                                .build();
+
+                        ReportGenerateDto searchOptions = new ReportGenerateDto(from, to, User.getInstance().getIdIsNaudotojas(), true );
+
+
+                        ApartmentsService apartmentsService = retrofit.create(ApartmentsService.class);
+                        final Call<RequestBody> requestCall = apartmentsService.generateReport(searchOptions);
+
+                        requestCall.enqueue(new Callback<RequestBody>() {
+                            /**
+                             * If request to apartments API was successful loads apartments data
+                             * @param call Call
+                             * @param response Response
+                             */
+                            @Override
+                            public void onResponse(Call<RequestBody> call, Response<RequestBody> response) {
+                                if (response.isSuccessful()) {
+                                    RequestBody complaints = response.body();
+                                    if (complaints == null) {
+                                        Toast.makeText(getApplicationContext(), "Could not send email, parameters null", Toast.LENGTH_SHORT).show();
+                                        return;
+                                    }
+
+                                } else {
+                                    Toast.makeText(getApplicationContext(), response.message(), Toast.LENGTH_LONG).show();
+                                }
+                            }
+
+                            /**
+                             * If request to apartments API was unsuccessful shows error message
+                             * @param call Call
+                             * @param t exception
+                             */
+                            @Override
+                            public void onFailure(Call<RequestBody> call, Throwable t) {
+                                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        Toast.makeText(getApplicationContext(), "Forwarded to email service", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Toast.makeText(getApplicationContext(), "Show download window", Toast.LENGTH_SHORT).show();
+                    }
                 }
-                else {
-                    Toast.makeText(getApplicationContext(), "Show download window", Toast.LENGTH_SHORT).show();
-                }
+
             }
         });
 

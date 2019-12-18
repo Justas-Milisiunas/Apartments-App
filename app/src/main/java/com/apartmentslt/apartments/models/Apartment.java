@@ -27,6 +27,7 @@ public class Apartment implements Serializable {
     private List<Rating> reitingas;
     private List<Complaint> skundas;
 
+    public Apartment(){}
     public Apartment(int dydis, int kambaruSkaicius, Date pridejimoData,
                      double kainaUzNakti, String adresas, String nuotraukaUrl,
                      String aprasas, String pavadinimas, String miestas, String šalis,
@@ -54,6 +55,18 @@ public class Apartment implements Serializable {
         this.privalumas = privalumas;
         this.reitingas = reitingas;
         this.skundas = skundas;
+    }
+
+    public Apartment(int dydis, int kambaruSkaicius, double kainaUzNakti, String adresas, String aprasas, String pavadinimas, String miestas, String šalis, int fkSavininkasidIsNaudotojas) {
+        this.dydis = dydis;
+        this.kambaruSkaicius = kambaruSkaicius;
+        this.kainaUzNakti = kainaUzNakti;
+        this.adresas = adresas;
+        this.aprasas = aprasas;
+        this.pavadinimas = pavadinimas;
+        this.miestas = miestas;
+        this.šalis = šalis;
+        this.fkSavininkasidIsNaudotojas = fkSavininkasidIsNaudotojas;
     }
 
     /**

@@ -376,8 +376,8 @@ public class ApartmentDetailsActivity extends AppCompatActivity {
      */
     private void bindData(Apartment apartment) {
         ((TextView) findViewById(R.id.address)).setText(apartment.getAdresas());
-        ((TextView) findViewById(R.id.price)).setText(apartment.getKainaUzNakti() + " price per night");
-        ((TextView) findViewById(R.id.size)).setText(apartment.getDydis() + " m2");
+        ((TextView) findViewById(R.id.price)).setText(apartment.getKainaUzNakti() + " per night");
+        ((TextView) findViewById(R.id.size)).setText(apartment.getDydis() + " m²");
         ((TextView) findViewById(R.id.description)).setText(apartment.getAprasas());
 
         ImageView image = findViewById(R.id.apartment_image);

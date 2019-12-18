@@ -103,10 +103,10 @@ public class ApartmentsListActivity extends AppCompatActivity implements BottomN
                 price.setText(model.getKainaUzNakti() + " per night");
 
                 TextView size = ((TextView) viewHolder.getComponent(R.id.size));
-                size.setText(String.valueOf(model.getDydis()));
+                size.setText(String.valueOf(model.getDydis()) + " m²");
 
                 Chip rooms = ((Chip) viewHolder.getComponent(R.id.rooms));
-                rooms.setText(model.getKambaruSkaicius() + " kambariai");
+                rooms.setText(model.getKambaruSkaicius() + " rooms");
 
                 RatingBar ratingBar = ((RatingBar) viewHolder.getComponent(R.id.rating_bar));
                 ratingBar.setRating(model.calculateRating());
