@@ -11,6 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -151,6 +152,12 @@ public class GenerateSummaryActivity extends AppCompatActivity implements Bottom
                         Toast.makeText(getApplicationContext(), "Forwarded to email service", Toast.LENGTH_SHORT).show();
                     }
                     else {
+                        String url = "http://192.168.8.107:55089/api/apartments/report/" + from + "/" +to+"/" + User.getInstance().getIdIsNaudotojas() +"/false";
+
+                        Intent i = new Intent(Intent.ACTION_VIEW);
+                        i.setData(Uri.parse(url));
+                        startActivity(i);
+
                         Toast.makeText(getApplicationContext(), "Show download window", Toast.LENGTH_SHORT).show();
                     }
                 }
